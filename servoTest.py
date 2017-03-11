@@ -12,5 +12,5 @@ def movServo(angle):
     duty = float(angle)/10.0 + 2.5
     #pwm.ChangeDutyCycle(duty)
     pwm.start(duty)
-    time.sleep(0.5)
+    time.sleep(1)
     pwm.stop()

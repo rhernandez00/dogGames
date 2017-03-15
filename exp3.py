@@ -9,6 +9,7 @@ If you publish work using this script please cite the relevant PsychoPy publicat
 
 from __future__ import division  # so that 1/3=0.333 instead of 1/3=0
 from psychopy import visual, core, data, event, logging, sound, gui
+#from psychopy import locale_setup, gui, visual, core, data, event, logging, sound
 from psychopy.constants import *  # things like STARTED, FINISHED
 import numpy as np  # whole numpy lib is available, prepend 'np.'
 from numpy import sin, cos, tan, log, log10, pi, average, sqrt, std, deg2rad, rad2deg, linspace, asarray
@@ -21,9 +22,9 @@ os.chdir(_thisDir)
 
 # Store info about the experiment session
 expName = 'exp2'  # from the Builder filename that created this script
-expInfo = {u'session': u'001', u'participant': u''}
-dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
-if dlg.OK == False: core.quit()  # user pressed cancel
+expInfo = {'session': '001', 'participant': 'test'}
+#dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
+#if dlg.OK == False: core.quit()  # user pressed cancel
 expInfo['date'] = data.getDateStr()  # add a simple timestamp
 expInfo['expName'] = expName
 
@@ -45,11 +46,11 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 # Start Code - component code to be run before the window creation
 
 # Setup the Window
-win = visual.Window(size=(1600, 900), fullscr=True, screen=0, allowGUI=True, allowStencil=False,
+win = visual.Window(size=(800, 480), fullscr=True, screen=0, allowGUI=True, allowStencil=False,
     monitor='testMonitor', color=[-1,-1,-1], colorSpace='rgb',
     blendMode='avg', useFBO=True,
     )
-# store frame rate of monitor if we can measure it successfully
+
 expInfo['frameRate']=win.getActualFrameRate()
 if expInfo['frameRate']!=None:
     frameDur = 1.0/round(expInfo['frameRate'])
@@ -64,14 +65,14 @@ yCorrectMax = 0.25
 
 
 trialClock = core.Clock()
-polygon = visual.Rect(win=win, name='polygon',
+incorrectPol = visual.Rect(win=win, name='incorrectPol',
     width=[0.5, 0.5][0], height=[0.5, 0.5][1],
     ori=0, pos=[-0.5, 0],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
     fillColor=[1,0,0], fillColorSpace='rgb',
     opacity=1,depth=0.0, 
 interpolate=True)
-polygon_2 = visual.Rect(win=win, name='polygon_2',
+verdaderoPol = visual.Rect(win=win, name='verdaderoPol',
     width=[0.5, 0.5][0], height=[0.5, 0.5][1],
     ori=0, pos=[0.5, 0],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
@@ -83,7 +84,7 @@ x, y = [None, None]
 
 # Initialize components for Routine "correct"
 correctClock = core.Clock()
-polygon_3 = visual.Rect(win=win, name='polygon_3',
+verdaderoFeed = visual.Rect(win=win, name='verdaderoFeed',
     width=[0.8, 0.8][0], height=[0.8, 0.8][1],
     ori=0, pos=[-0.4, -0.4],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
@@ -95,7 +96,7 @@ corrSound.setVolume(1)
 
 # Initialize components for Routine "incorrect"
 incorrectClock = core.Clock()
-polygon_4 = visual.Polygon(win=win, name='polygon_4',
+falsoPol = visual.Polygon(win=win, name='falsoPol',
     edges = 90, size=[0.5, 0.5],
     ori=0, pos=[0, 0],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
@@ -142,8 +143,8 @@ for thisTrial in trials:
     mouse.time = []
     # keep track of which components have finished
     trialComponents = []
-    trialComponents.append(polygon)
-    trialComponents.append(polygon_2)
+    trialComponents.append(incorrectPol)
+    trialComponents.append(verdaderoPol)
     trialComponents.append(mouse)
     for thisComponent in trialComponents:
         if hasattr(thisComponent, 'status'):
@@ -157,19 +158,19 @@ for thisTrial in trials:
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         
-        # *polygon* updates
-        if t >= 0.0 and polygon.status == NOT_STARTED:
+        # *incorrectPol* updates
+        if t >= 0.0 and incorrectPol.status == NOT_STARTED:
             # keep track of start time/frame for later
-            polygon.tStart = t  # underestimates by a little under one frame
-            polygon.frameNStart = frameN  # exact frame index
-            polygon.setAutoDraw(True)
+            incorrectPol.tStart = t  # underestimates by a little under one frame
+            incorrectPol.frameNStart = frameN  # exact frame index
+            incorrectPol.setAutoDraw(True)
         
-        # *polygon_2* updates
-        if t >= 0.0 and polygon_2.status == NOT_STARTED:
+        # *verdaderoPol* updates
+        if t >= 0.0 and verdaderoPol.status == NOT_STARTED:
             # keep track of start time/frame for later
-            polygon_2.tStart = t  # underestimates by a little under one frame
-            polygon_2.frameNStart = frameN  # exact frame index
-            polygon_2.setAutoDraw(True)
+            verdaderoPol.tStart = t  # underestimates by a little under one frame
+            verdaderoPol.frameNStart = frameN  # exact frame index
+            verdaderoPol.setAutoDraw(True)
         # *mouse* updates
         if t >= 0.0 and mouse.status == NOT_STARTED:
             # keep track of start time/frame for later
@@ -231,7 +232,7 @@ for thisTrial in trials:
         # update component parameters for each repeat
         # keep track of which components have finished
         correctComponents = []
-        correctComponents.append(polygon_3)
+        correctComponents.append(verdaderoFeed)
         correctComponents.append(corrSound)
         for thisComponent in correctComponents:
             if hasattr(thisComponent, 'status'):
@@ -246,14 +247,14 @@ for thisTrial in trials:
             frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
             # update/draw components on each frame
             
-            # *polygon_3* updates
-            if t >= 0.0 and polygon_3.status == NOT_STARTED:
+            # *verdaderoFeed* updates
+            if t >= 0.0 and verdaderoFeed.status == NOT_STARTED:
                 # keep track of start time/frame for later
-                polygon_3.tStart = t  # underestimates by a little under one frame
-                polygon_3.frameNStart = frameN  # exact frame index
-                polygon_3.setAutoDraw(True)
-            if polygon_3.status == STARTED and t >= (0.0 + (1.0-win.monitorFramePeriod*0.75)): #most of one frame period left
-                polygon_3.setAutoDraw(False)
+                verdaderoFeed.tStart = t  # underestimates by a little under one frame
+                verdaderoFeed.frameNStart = frameN  # exact frame index
+                verdaderoFeed.setAutoDraw(True)
+            if verdaderoFeed.status == STARTED and t >= (0.0 + (1.0-win.monitorFramePeriod*0.75)): #most of one frame period left
+                verdaderoFeed.setAutoDraw(False)
             # start/stop corrSound
             if t >= 0.1 and corrSound.status == NOT_STARTED:
                 # keep track of start time/frame for later
@@ -295,7 +296,7 @@ for thisTrial in trials:
         # update component parameters for each repeat
         # keep track of which components have finished
         incorrectComponents = []
-        incorrectComponents.append(polygon_4)
+        incorrectComponents.append(falsoPol)
         incorrectComponents.append(sound_1)
         for thisComponent in incorrectComponents:
             if hasattr(thisComponent, 'status'):
@@ -309,14 +310,14 @@ for thisTrial in trials:
             frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
             # update/draw components on each frame
             
-            # *polygon_4* updates
-            if t >= 0.0 and polygon_4.status == NOT_STARTED:
+            # *falsoPol* updates
+            if t >= 0.0 and falsoPol.status == NOT_STARTED:
                 # keep track of start time/frame for later
-                polygon_4.tStart = t  # underestimates by a little under one frame
-                polygon_4.frameNStart = frameN  # exact frame index
-                polygon_4.setAutoDraw(True)
-            if polygon_4.status == STARTED and t >= (0.0 + (1.0-win.monitorFramePeriod*0.75)): #most of one frame period left
-                polygon_4.setAutoDraw(False)
+                falsoPol.tStart = t  # underestimates by a little under one frame
+                falsoPol.frameNStart = frameN  # exact frame index
+                falsoPol.setAutoDraw(True)
+            if falsoPol.status == STARTED and t >= (0.0 + (1.0-win.monitorFramePeriod*0.75)): #most of one frame period left
+                falsoPol.setAutoDraw(False)
             # start/stop sound_1
             if t >= 0.1 and sound_1.status == NOT_STARTED:
                 # keep track of start time/frame for later

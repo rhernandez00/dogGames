@@ -58,10 +58,11 @@ else:
     frameDur = 1.0/60.0 # couldn't get a reliable measure so guess
 
 # Initialize components for Routine "trial"
-xCorrectMin = 0.25
-xCorrectMax = 0.75
-yCorrectMin = -0.25
-yCorrectMax = 0.25
+xCorrectMin = -1
+xCorrectMax = 0
+yCorrectMin = -1
+yCorrectMax = 1
+nTrials = 8
 
 
 trialClock = core.Clock()
@@ -82,36 +83,22 @@ interpolate=True)
 mouse = event.Mouse(win=win)
 x, y = [None, None]
 
-# Initialize components for Routine "correct"
-correctClock = core.Clock()
-verdaderoFeed = visual.Rect(win=win, name='verdaderoFeed',
-    width=[0.8, 0.8][0], height=[0.8, 0.8][1],
-    ori=0, pos=[-0.4, -0.4],
+# Initialize components for Routine "correctFeed"
+correctFeedClock = core.Clock()
+rewardState = visual.Rect(
+    win=win, name='rewardState',
+    width=(2, 2)[0], height=(2, 2)[1],
+    ori=0, pos=(0, 0),
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
     fillColor=[0,0,1], fillColorSpace='rgb',
-    opacity=1,depth=0.0, 
-interpolate=True)
-corrSound = sound.Sound('Correcto.wav', secs=-1)
-corrSound.setVolume(1)
-
-# Initialize components for Routine "incorrect"
-incorrectClock = core.Clock()
-falsoPol = visual.Polygon(win=win, name='falsoPol',
-    edges = 90, size=[0.5, 0.5],
-    ori=0, pos=[0, 0],
-    lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
-    fillColor=[1,0,0], fillColorSpace='rgb',
-    opacity=1,depth=0.0, 
-interpolate=True)
-sound_1 = sound.Sound(u'Incorrecto.wav', secs=-1)
-sound_1.setVolume(1)
+    opacity=1, depth=0.0, interpolate=True)
 
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine 
 
 # set up handler to look after randomisation of conditions etc
-trials = data.TrialHandler(nReps=8, method='random', 
+trials = data.TrialHandler(nReps=nTrials, method='random', 
     extraInfo=expInfo, originPath=None,
     trialList=[None],
     seed=None, name='trials')
@@ -223,137 +210,64 @@ for thisTrial in trials:
     routineTimer.reset()
     
     if ((x < xCorrectMax) & (x > xCorrectMin)) & ((y < yCorrectMax) & (y > yCorrectMin)):
-        
-        #------Prepare to start Routine "correct"-------
-        t = 0
-        correctClock.reset()  # clock 
-        frameN = -1
-        routineTimer.add(1.000000)
-        # update component parameters for each repeat
-        # keep track of which components have finished
-        correctComponents = []
-        correctComponents.append(verdaderoFeed)
-        correctComponents.append(corrSound)
-        for thisComponent in correctComponents:
-            if hasattr(thisComponent, 'status'):
-                thisComponent.status = NOT_STARTED
-        
-        
-        #-------Start Routine "correct"-------
-        continueRoutine = True
-        while continueRoutine and routineTimer.getTime() > 0:
-            # get current time
-            t = correctClock.getTime()
-            frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-            # update/draw components on each frame
-            
-            # *verdaderoFeed* updates
-            if t >= 0.0 and verdaderoFeed.status == NOT_STARTED:
-                # keep track of start time/frame for later
-                verdaderoFeed.tStart = t  # underestimates by a little under one frame
-                verdaderoFeed.frameNStart = frameN  # exact frame index
-                verdaderoFeed.setAutoDraw(True)
-            if verdaderoFeed.status == STARTED and t >= (0.0 + (1.0-win.monitorFramePeriod*0.75)): #most of one frame period left
-                verdaderoFeed.setAutoDraw(False)
-            # start/stop corrSound
-            if t >= 0.1 and corrSound.status == NOT_STARTED:
-                # keep track of start time/frame for later
-                corrSound.tStart = t  # underestimates by a little under one frame
-                corrSound.frameNStart = frameN  # exact frame index
-                corrSound.play()  # start the sound (it finishes automatically)
-            if corrSound.status == STARTED and t >= (0.1 + (0.9-win.monitorFramePeriod*0.75)): #most of one frame period left
-                corrSound.stop()  # stop the sound (if longer than duration)
-            
-            # check if all components have finished
-            if not continueRoutine:  # a component has requested a forced-end of Routine
-                break
-            continueRoutine = False  # will revert to True if at least one component still running
-            for thisComponent in correctComponents:
-                if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                    continueRoutine = True
-                    break  # at least one component has not yet finished
-            
-            # check for quit (the Esc key)
-            if endExpNow or event.getKeys(keyList=["escape"]):
-                core.quit()
-            
-            # refresh the screen
-            if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-                win.flip()
-        
-        #-------Ending Routine "correct"-------
-        for thisComponent in correctComponents:
-            if hasattr(thisComponent, "setAutoDraw"):
-                thisComponent.setAutoDraw(False)
-        corrSound.stop() #ensure sound has stopped at end of routine
-        
+        rewardState.fillColor = [0.,0.,1.]
     else:
-        #------Prepare to start Routine "incorrect"-------
-        t = 0
-        incorrectClock.reset()  # clock 
-        frameN = -1
-        routineTimer.add(1.000000)
-        # update component parameters for each repeat
-        # keep track of which components have finished
-        incorrectComponents = []
-        incorrectComponents.append(falsoPol)
-        incorrectComponents.append(sound_1)
-        for thisComponent in incorrectComponents:
-            if hasattr(thisComponent, 'status'):
-                thisComponent.status = NOT_STARTED
+        rewardState.fillColor = [0.,1.,1.]
         
-        #-------Start Routine "incorrect"-------
-        continueRoutine = True
-        while continueRoutine and routineTimer.getTime() > 0:
-            # get current time
-            t = incorrectClock.getTime()
-            frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-            # update/draw components on each frame
-            
-            # *falsoPol* updates
-            if t >= 0.0 and falsoPol.status == NOT_STARTED:
-                # keep track of start time/frame for later
-                falsoPol.tStart = t  # underestimates by a little under one frame
-                falsoPol.frameNStart = frameN  # exact frame index
-                falsoPol.setAutoDraw(True)
-            if falsoPol.status == STARTED and t >= (0.0 + (1.0-win.monitorFramePeriod*0.75)): #most of one frame period left
-                falsoPol.setAutoDraw(False)
-            # start/stop sound_1
-            if t >= 0.1 and sound_1.status == NOT_STARTED:
-                # keep track of start time/frame for later
-                sound_1.tStart = t  # underestimates by a little under one frame
-                sound_1.frameNStart = frameN  # exact frame index
-                sound_1.play()  # start the sound (it finishes automatically)
-            if sound_1.status == STARTED and t >= (0.1 + (0.9-win.monitorFramePeriod*0.75)): #most of one frame period left
-                sound_1.stop()  # stop the sound (if longer than duration)
-            
-            # check if all components have finished
-            if not continueRoutine:  # a component has requested a forced-end of Routine
-                break
-            continueRoutine = False  # will revert to True if at least one component still running
-            for thisComponent in incorrectComponents:
-                if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                    continueRoutine = True
-                    break  # at least one component has not yet finished
-            
-            # check for quit (the Esc key)
-            if endExpNow or event.getKeys(keyList=["escape"]):
-                core.quit()
-            
-            # refresh the screen
-            if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-                win.flip()
+    # ------Prepare to start Routine "correctFeed"-------
+    t = 0
+    correctFeedClock.reset()  # clock
+    frameN = -1
+    continueRoutine = True
+    routineTimer.add(1.000000)
+    # update component parameters for each repeat
+    # keep track of which components have finished
+    correctFeedComponents = [rewardState]
+    for thisComponent in correctFeedComponents:
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    
+    # -------Start Routine "correctFeed"-------
+    while continueRoutine and routineTimer.getTime() > 0:
+        # get current time
+        t = correctFeedClock.getTime()
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
         
-        #-------Ending Routine "incorrect"-------
-        for thisComponent in incorrectComponents:
-            if hasattr(thisComponent, "setAutoDraw"):
-                thisComponent.setAutoDraw(False)
-        sound_1.stop() #ensure sound has stopped at end of routine
+        # *rewardState* updates
+        if t >= 0.0 and rewardState.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            rewardState.tStart = t
+            rewardState.frameNStart = frameN  # exact frame index
+            rewardState.setAutoDraw(True)
+        frameRemains = 0.0 + 1- win.monitorFramePeriod * 0.75  # most of one frame period left
+        if rewardState.status == STARTED and t >= frameRemains:
+            rewardState.setAutoDraw(False)
         
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in correctFeedComponents:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
         
+        # check for quit (the Esc key)
+        if endExpNow or event.getKeys(keyList=["escape"]):
+            core.quit()
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+    
+    # -------Ending Routine "correctFeed"-------
+    for thisComponent in correctFeedComponents:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)    
     thisExp.nextEntry()
     
-# completed 27 repeats of 'trials'
+# completed X repeats of 'trials'
 
 win.close()
 core.quit()

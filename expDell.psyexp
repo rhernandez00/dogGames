@@ -24,7 +24,7 @@
     <Param name="Screen" updates="None" val="1" valType="num"/>
   </Settings>
   <Routines>
-    <Routine name="trial">
+    <Routine name="initi">
       <PolygonComponent name="green">
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="fillColorSpace" updates="constant" val="rgb" valType="str"/>
@@ -32,19 +32,19 @@
         <Param name="fillColor" updates="constant" val="$[0,1,0]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
-        <Param name="pos" updates="constant" val="(-0.4, 0)" valType="code"/>
+        <Param name="pos" updates="constant" val="(-0.5, 0)" valType="code"/>
         <Param name="interpolate" updates="constant" val="linear" valType="str"/>
         <Param name="lineWidth" updates="constant" val="1" valType="code"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
-        <Param name="lineColor" updates="constant" val="$[1,1,1]" valType="str"/>
+        <Param name="lineColor" updates="constant" val="$[-1.000,-1.000,-1.000]" valType="str"/>
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
         <Param name="lineColorSpace" updates="constant" val="rgb" valType="str"/>
         <Param name="nVertices" updates="constant" val="4" valType="int"/>
-        <Param name="size" updates="constant" val="(0.5, 0.8)" valType="code"/>
+        <Param name="size" updates="constant" val="(1, 2)" valType="code"/>
       </PolygonComponent>
       <MouseComponent name="mouse">
         <Param name="name" updates="None" val="mouse" valType="code"/>
@@ -65,7 +65,7 @@
         <Param name="fillColor" updates="constant" val="$[1,0,0]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
-        <Param name="pos" updates="constant" val="(0.4, 0)" valType="code"/>
+        <Param name="pos" updates="constant" val="(0.5, 0)" valType="code"/>
         <Param name="interpolate" updates="constant" val="linear" valType="str"/>
         <Param name="lineWidth" updates="constant" val="1" valType="code"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
@@ -77,30 +77,31 @@
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
         <Param name="lineColorSpace" updates="constant" val="rgb" valType="str"/>
         <Param name="nVertices" updates="constant" val="4" valType="int"/>
-        <Param name="size" updates="constant" val="(0.5, 1)" valType="code"/>
+        <Param name="size" updates="constant" val="(1, 2)" valType="code"/>
       </PolygonComponent>
     </Routine>
     <Routine name="correctFeed">
-      <TextComponent name="text">
+      <PolygonComponent name="rewardState">
         <Param name="opacity" updates="constant" val="1" valType="code"/>
-        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="name" updates="None" val="text" valType="code"/>
-        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
-        <Param name="color" updates="constant" val="white" valType="str"/>
-        <Param name="text" updates="constant" val="Any text&amp;#10;&amp;#10;including line breaks" valType="str"/>
-        <Param name="stopVal" updates="constant" val="1.0" valType="code"/>
+        <Param name="fillColorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="rewardState" valType="code"/>
+        <Param name="fillColor" updates="constant" val="$[0,0,1]" valType="str"/>
+        <Param name="stopVal" updates="constant" val="1" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
-        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="interpolate" updates="constant" val="linear" valType="str"/>
+        <Param name="lineWidth" updates="constant" val="1" valType="code"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="lineColor" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
-        <Param name="font" updates="constant" val="Arial" valType="str"/>
-        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
-      </TextComponent>
+        <Param name="lineColorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="nVertices" updates="constant" val="4" valType="int"/>
+        <Param name="size" updates="constant" val="(2, 2)" valType="code"/>
+      </PolygonComponent>
     </Routine>
   </Routines>
   <Flow>
@@ -110,12 +111,12 @@
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
-      <Param name="nReps" updates="None" val="5" valType="code"/>
+      <Param name="nReps" updates="None" val="4" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="conditions" updates="None" val="None" valType="str"/>
-      <Param name="Selected rows" updates="None" val="" valType="code"/>
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
-    <Routine name="trial"/>
+    <Routine name="initi"/>
     <Routine name="correctFeed"/>
     <LoopTerminator name="bigLoop"/>
   </Flow>

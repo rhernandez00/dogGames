@@ -48,8 +48,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 # Setup the Window
 win = visual.Window(size=(800, 480), fullscr=True, screen=0, allowGUI=True, allowStencil=False,
     monitor='testMonitor', color=[-1,-1,-1], colorSpace='rgb',
-    blendMode='avg', useFBO=True,
-    )
+    blendMode='avg')
 
 expInfo['frameRate']=win.getActualFrameRate()
 if expInfo['frameRate']!=None:

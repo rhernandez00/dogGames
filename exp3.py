@@ -66,14 +66,14 @@ nTrials = 8
 
 trialClock = core.Clock()
 incorrectPol = visual.Rect(win=win, name='incorrectPol',
-    width=[0.5, 0.5][0], height=[0.5, 0.5][1],
+    width=[1, 2][0], height=[1, 2][1],
     ori=0, pos=[-0.5, 0],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
     fillColor=[1,0,0], fillColorSpace='rgb',
     opacity=1,depth=0.0, 
 interpolate=True)
 verdaderoPol = visual.Rect(win=win, name='verdaderoPol',
-    width=[0.5, 0.5][0], height=[0.5, 0.5][1],
+    width=[1, 2][0], height=[1, 2][1],
     ori=0, pos=[0.5, 0],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
     fillColor=[0,1,0], fillColorSpace='rgb',
@@ -211,7 +211,7 @@ for thisTrial in trials:
     if ((x < xCorrectMax) & (x > xCorrectMin)) & ((y < yCorrectMax) & (y > yCorrectMin)):
         rewardState.fillColor = [0.,0.,1.]
     else:
-        rewardState.fillColor = [0.,1.,1.]
+        rewardState.fillColor = [0.8.,0.,0.]
         
     # ------Prepare to start Routine "correctFeed"-------
     t = 0

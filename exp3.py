@@ -239,8 +239,7 @@ for thisTrial in trials:
             rewardState.tStart = t
             rewardState.frameNStart = frameN  # exact frame index
             rewardState.setAutoDraw(True)
-        frameRemains = 0.0 + 1- win.monitorFramePeriod * 0.75  # most of one frame period left
-        if rewardState.status == STARTED and t >= frameRemains:
+        elif rewardState.status == STARTED and t >= (0.0 + 1.0):
             rewardState.setAutoDraw(False)
         
         # check if all components have finished

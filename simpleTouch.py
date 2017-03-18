@@ -31,9 +31,7 @@ rotTube = tubesCord[0]
 outCord = 132
 ports = list(serial.tools.list_ports.comports())
 
-data = serial.Serial(nPort,9600,timeout=1)   
-time.sleep(1)
-data.write(str(rotTube))
+
 
 for p in ports:
     if "CH340" in p[1]:
@@ -41,6 +39,10 @@ for p in ports:
         strTmp = strTmp[0:5]
         strTmp = strTmp.replace('COM','')
         nPort = 'com' + strTmp
+
+data = serial.Serial(nPort,9600,timeout=1)   
+time.sleep(1)
+data.write(str(rotTube))
 
 def reward():
     global nPelletsGiven

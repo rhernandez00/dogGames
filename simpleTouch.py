@@ -15,8 +15,52 @@ import numpy as np  # whole numpy lib is available, prepend 'np.'
 from numpy import sin, cos, tan, log, log10, pi, average, sqrt, std, deg2rad, rad2deg, linspace, asarray
 from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
-runfile('servoFunction')
+import serial
+import serial.tools.list_ports
+import time
 
+
+#vars for servo
+nPelletsMax = 13
+nTubes = 4
+
+tube = 1
+nPelletsGiven = 0
+tubesCord = [106,83,58,36]
+rotTube = tubesCord[0]
+outCord = 132
+ports = list(serial.tools.list_ports.comports())
+
+data = serial.Serial(nPort,9600,timeout=1)   
+time.sleep(1)
+data.write(str(rotTube))
+
+for p in ports:
+    if "CH340" in p[1]:
+        strTmp = str(p)
+        strTmp = strTmp[0:5]
+        strTmp = strTmp.replace('COM','')
+        nPort = 'com' + strTmp
+
+def reward():
+    global nPelletsGiven
+    global rotTube
+    global tube
+    data.write(str(outCord))
+    nPelletsGiven += 1
+    if nPelletsGiven >= nPelletsMax:
+        nPelletsGiven = 1
+        tube += 1
+        if tube > 4:
+            tube = 1
+        rotTube = tubesCord[tube-1]
+    print 'tubo: ' + str(rotTube)
+    print 'pellets: ' + str(nPelletsGiven)
+    time.sleep(2)
+    data.write(str(rotTube))
+        
+time.sleep(2)    
+data.write(str(rotTube))
 
 
 # Ensure that relative paths start from the same directory as this script
@@ -270,6 +314,6 @@ for thisTrial in trials:
     thisExp.nextEntry()
     
 # completed X repeats of 'trials'
-
+data.close()
 win.close()
 core.quit()

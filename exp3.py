@@ -57,8 +57,8 @@ else:
     frameDur = 1.0/60.0 # couldn't get a reliable measure so guess
 
 # Initialize components for Routine "trial"
-xCorrectMin = -1
-xCorrectMax = 0
+xCorrectMin = 0
+xCorrectMax = 1
 yCorrectMin = -1
 yCorrectMax = 1
 nTrials = 8
@@ -211,7 +211,7 @@ for thisTrial in trials:
     if ((x < xCorrectMax) & (x > xCorrectMin)) & ((y < yCorrectMax) & (y > yCorrectMin)):
         rewardState.fillColor = [0.,0.,1.]
     else:
-        rewardState.fillColor = [0.8.,0.,0.]
+        rewardState.fillColor = [0.8,0.,0.]
         
     # ------Prepare to start Routine "correctFeed"-------
     t = 0

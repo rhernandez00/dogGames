@@ -40,15 +40,16 @@ for p in ports:
         strTmp = strTmp.replace('COM','')
         nPort = 'com' + strTmp
 
-data = serial.Serial(nPort,9600,timeout=1)   
+#data = serial.Serial(nPort,9600,timeout=1)   
+dataArduino = serial.Serial('com6',9600,timeout=1)
 time.sleep(1)
-data.write(str(rotTube))
+dataArduino.write(str(rotTube))
 
 def reward():
     global nPelletsGiven
     global rotTube
     global tube
-    data.write(str(outCord))
+    dataArduino.write(str(outCord))
     nPelletsGiven += 1
     if nPelletsGiven >= nPelletsMax:
         nPelletsGiven = 1
@@ -58,11 +59,10 @@ def reward():
         rotTube = tubesCord[tube-1]
     print 'tubo: ' + str(rotTube)
     print 'pellets: ' + str(nPelletsGiven)
-    time.sleep(2)
-    data.write(str(rotTube))
+    
         
 time.sleep(2)    
-data.write(str(rotTube))
+dataArduino.write(str(rotTube))
 
 
 # Ensure that relative paths start from the same directory as this script
@@ -106,8 +106,7 @@ else:
     frameDur = 1.0/60.0 # couldn't get a reliable measure so guess
 
 # Initialize components for Routine "trial"
-xCorrectMin = -1
-xCorrectMax = 0
+
 yCorrectMin = -1
 yCorrectMax = 1
 nTrials = 8
@@ -158,6 +157,18 @@ if thisTrial != None:
         exec(paramName + '= thisTrial.' + paramName)
 
 for thisTrial in trials:
+    side = randint(low=2,size=1)
+    if side == 0:
+        verdaderoPol.pos = [-0.5,0]
+        incorrectPol.pos = [0.5,0]
+        xCorrectMin = -1
+        xCorrectMax = 0
+    else:
+        verdaderoPol.pos = [0.5,0]
+        incorrectPol.pos = [-0.5,0]
+        xCorrectMin = 0
+        xCorrectMax = 1
+    
     currentLoop = trials
     # abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
     if thisTrial != None:
@@ -260,6 +271,9 @@ for thisTrial in trials:
     if ((x < xCorrectMax) & (x > xCorrectMin)) & ((y < yCorrectMax) & (y > yCorrectMin)):
         rewardState.fillColor = [0.,0.,1.]
         reward()
+        rewardReset = 1
+        #time.sleep(2)
+        
     else:
         rewardState.fillColor = [0.8,0.,0.]
         
@@ -268,7 +282,7 @@ for thisTrial in trials:
     correctFeedClock.reset()  # clock
     frameN = -1
     continueRoutine = True
-    routineTimer.add(1.000000)
+    routineTimer.add(3.000000)
     # update component parameters for each repeat
     # keep track of which components have finished
     correctFeedComponents = [rewardState]
@@ -278,6 +292,9 @@ for thisTrial in trials:
     
     # -------Start Routine "correctFeed"-------
     while continueRoutine and routineTimer.getTime() > 0:
+        #if (routineTimer.getTime() < 1.00000) and (rewardReset == 1):
+            
+        #    rewardReset = 0
         # get current time
         t = correctFeedClock.getTime()
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
@@ -314,8 +331,10 @@ for thisTrial in trials:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)    
     thisExp.nextEntry()
+    dataArduino.write(str(rotTube))
+    
     
 # completed X repeats of 'trials'
-data.close()
+dataArduino.close()
 win.close()
 core.quit()

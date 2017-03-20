@@ -9,6 +9,7 @@ Servo myServo; // create a servo object called myServo
 void setup() {
   Serial.begin(9600); //start serial port
   myServo.attach(servoPin); //declare to which pin is the servo connected
+  pinMode(13, OUTPUT);
 }
  
 void loop() {
@@ -16,8 +17,11 @@ void loop() {
   { //wait until information is received from the serial port
     pos = Serial.parseInt(); //read the position from the servo
     myServo.write(pos); //write the position into the servo
+    digitalWrite(13, HIGH);
     Serial.print(pos);
     Serial.print("/n");
+    delay(servoDelay); //give time to the servo to reach the position
+    digitalWrite(13, LOW);
   };
-  delay(servoDelay); //give time to the servo to reach the position
+  
 }

@@ -28,7 +28,7 @@ for p in ports:
         strTmp = strTmp.replace('COM','')
         nPort = 'com' + strTmp
         
-data = serial.Serial('com6',9600,timeout=1)   
+data = serial.Serial('com8',9600,timeout=1)   
 time.sleep(1)
 data.write(str(rotTube))
 

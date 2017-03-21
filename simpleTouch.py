@@ -19,6 +19,8 @@ import serial
 import serial.tools.list_ports
 import time
 
+nTrials = 50
+
 
 #vars for servo
 nPelletsMax = 13
@@ -41,9 +43,9 @@ for p in ports:
         nPort = 'com' + strTmp
 
 #data = serial.Serial(nPort,9600,timeout=1)   
-dataArduino = serial.Serial('com6',9600,timeout=1)
-time.sleep(1)
-dataArduino.write(str(rotTube))
+dataArduino = serial.Serial('com8',9600,timeout=1)
+#time.sleep(1)
+#dataArduino.write(str(rotTube))
 
 def reward():
     global nPelletsGiven
@@ -109,7 +111,7 @@ else:
 
 yCorrectMin = -1
 yCorrectMax = 1
-nTrials = 8
+
 
 
 trialClock = core.Clock()
@@ -139,6 +141,16 @@ rewardState = visual.Rect(
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
     fillColor=[0,0,1], fillColorSpace='rgb',
     opacity=1, depth=0.0, interpolate=True)
+
+# Initialize components for Routine "intervalInter"
+intervalInterClock = core.Clock()
+interTrialPol = visual.Rect(win=win, name='interTrialPol',
+    width=[2, 2][0], height=[2, 2][1],
+    ori=0, pos=[0, 0],
+    lineWidth=1, lineColor=[-1,-1,-1], lineColorSpace='rgb',
+    fillColor=[-1,-1,-1], fillColorSpace='rgb',
+    opacity=1,depth=0.0, 
+interpolate=True)
 
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
@@ -330,8 +342,61 @@ for thisTrial in trials:
     for thisComponent in correctFeedComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)    
-    thisExp.nextEntry()
+    #reward set to 0
     dataArduino.write(str(rotTube))
+    
+    #------Prepare to start Routine "intervalInter"-------
+    t = 0
+    intervalInterClock.reset()  # clock 
+    frameN = -1
+    routineTimer.add(1.000000)
+    # update component parameters for each repeat
+    # keep track of which components have finished
+    intervalInterComponents = []
+    intervalInterComponents.append(interTrialPol)
+    for thisComponent in intervalInterComponents:
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+
+    #-------Start Routine "intervalInter"-------
+    continueRoutine = True
+    while continueRoutine and routineTimer.getTime() > 0:
+        # get current time
+        t = intervalInterClock.getTime()
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # *interTrialPol* updates
+        if t >= 0.0 and interTrialPol.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            interTrialPol.tStart = t  # underestimates by a little under one frame
+            interTrialPol.frameNStart = frameN  # exact frame index
+            interTrialPol.setAutoDraw(True)
+        if interTrialPol.status == STARTED and t >= (0.0 + (2-win.monitorFramePeriod*0.75)): #most of one frame period left
+            interTrialPol.setAutoDraw(False)
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in intervalInterComponents:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # check for quit (the Esc key)
+        if endExpNow or event.getKeys(keyList=["escape"]):
+            core.quit()
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+
+    #-------Ending Routine "intervalInter"-------
+    for thisComponent in intervalInterComponents:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    thisExp.nextEntry()
     
     
 # completed X repeats of 'trials'

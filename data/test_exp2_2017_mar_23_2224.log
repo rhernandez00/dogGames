@@ -1,0 +1,64 @@
+4.8534 	WARNING 	User requested fullscreen with size [800 480], but screen is actually [1024, 768]. Using actual size
+6.6119 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, bitsMode=UNKNOWN, blendMode='avg', color=array([-1., -1., -1.]), colorSpace='rgb', fullscr=UNKNOWN, gamma=None, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor instance at 0x09115DC8>, name='window1', pos=[0, 0], screen=0, size=array([1024,  768]), stereo=False, units=u'norm', useFBO=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+6.6119 	EXP 	window1: recordFrameIntervals = False
+6.7850 	EXP 	window1: recordFrameIntervals = True
+6.9767 	EXP 	window1: recordFrameIntervals = False
+6.9773 	EXP 	<method-wrapper '__getattribute__' of attributeSetter object at 0x05F2E5D0>: vertices = array([[-0.05,  1.  ],
+       [ 0.05,  1.  ],
+       [ 0.05, -1.  ],
+       [-0.05, -1.  ]])
+6.9805 	EXP 	Created incorrectPol = Rect(autoDraw=False, autoLog=True, closeShape=True, contrast=1.0, depth=0.0, fillColor=array([ 1.,  0.,  0.]), fillColorSpace='rgb', fillRGB=array([ 1.,  0.,  0.]), interpolate=True, lineColor=array([ 1.,  1.,  1.]), lineColorSpace='rgb', lineRGB=array([ 1.,  1.,  1.]), lineWidth=1, name='incorrectPol', opacity=1.0, ori=array(0.0), pos=array([-0.5,  0. ]), size=array([ 1.,  1.]), units=u'norm', vertices=ndarray(...), win=Window(...))
+6.9810 	EXP 	<method-wrapper '__getattribute__' of attributeSetter object at 0x05F2E5D0>: vertices = array([[-1.,  1.],
+       [ 1.,  1.],
+       [ 1., -1.],
+       [-1., -1.]])
+6.9840 	EXP 	Created verdaderoPol = Rect(autoDraw=False, autoLog=True, closeShape=True, contrast=1.0, depth=-1.0, fillColor=array([ 0.,  1.,  0.]), fillColorSpace='rgb', fillRGB=array([ 0.,  1.,  0.]), interpolate=True, lineColor=array([ 1.,  1.,  1.]), lineColorSpace='rgb', lineRGB=array([ 1.,  1.,  1.]), lineWidth=1, name='verdaderoPol', opacity=1.0, ori=array(0.0), pos=array([ 0.5,  0. ]), size=array([ 1.,  1.]), units=u'norm', vertices=ndarray(...), win=Window(...))
+6.9846 	EXP 	<method-wrapper '__getattribute__' of attributeSetter object at 0x05F2E5D0>: vertices = array([[-1.,  1.],
+       [ 1.,  1.],
+       [ 1., -1.],
+       [-1., -1.]])
+6.9876 	EXP 	Created rewardState = Rect(autoDraw=False, autoLog=True, closeShape=True, contrast=1.0, depth=0.0, fillColor=array([ 0.,  0.,  1.]), fillColorSpace='rgb', fillRGB=array([ 0.,  0.,  1.]), interpolate=True, lineColor=array([ 1.,  1.,  1.]), lineColorSpace='rgb', lineRGB=array([ 1.,  1.,  1.]), lineWidth=1, name='rewardState', opacity=1.0, ori=array(0.0), pos=array([ 0.,  0.]), size=array([ 1.,  1.]), units=u'norm', vertices=ndarray(...), win=Window(...))
+6.9881 	EXP 	<method-wrapper '__getattribute__' of attributeSetter object at 0x05F2E5D0>: vertices = array([[-1.,  1.],
+       [ 1.,  1.],
+       [ 1., -1.],
+       [-1., -1.]])
+6.9912 	EXP 	Created interTrialPol = Rect(autoDraw=False, autoLog=True, closeShape=True, contrast=1.0, depth=0.0, fillColor=array([-1., -1., -1.]), fillColorSpace='rgb', fillRGB=array([-1., -1., -1.]), interpolate=True, lineColor=array([-1., -1., -1.]), lineColorSpace='rgb', lineRGB=array([-1., -1., -1.]), lineWidth=1, name='interTrialPol', opacity=1.0, ori=array(0.0), pos=array([ 0.,  0.]), size=array([ 1.,  1.]), units=u'norm', vertices=ndarray(...), win=Window(...))
+6.9922 	EXP 	Created sequence: random, trialTypes=1, nReps=50, seed=None
+7.0784 	EXP 	New trial (rep=0, index=0): None
+7.0947 	EXP 	verdaderoPol: pos = [-0.5, 0]
+7.0947 	EXP 	incorrectPol: pos = [0.5, 0]
+7.0947 	EXP 	incorrectPol: autoDraw = True
+7.0947 	EXP 	verdaderoPol: autoDraw = True
+8.5929 	DATA 	Mouse: Left button down, pos=(565,539)
+8.6092 	EXP 	incorrectPol: autoDraw = False
+8.6092 	EXP 	verdaderoPol: autoDraw = False
+8.6092 	EXP 	rewardState: fillColor = [0.8, 0.0, 0.0]
+8.6092 	EXP 	rewardState: autoDraw = True
+8.7428 	DATA 	Mouse: Left button up, pos=(565,539)
+9.6265 	EXP 	rewardState: autoDraw = False
+9.6265 	EXP 	rewardState: autoDraw = False
+9.6265 	EXP 	interTrialPol: autoDraw = True
+11.6092 	EXP 	New trial (rep=1, index=0): None
+11.6253 	EXP 	interTrialPol: autoDraw = False
+11.6253 	EXP 	interTrialPol: autoDraw = False
+11.6253 	EXP 	verdaderoPol: pos = [-0.5, 0]
+11.6253 	EXP 	incorrectPol: pos = [-0.5, 0]
+11.6253 	EXP 	incorrectPol: autoDraw = True
+11.6253 	EXP 	verdaderoPol: autoDraw = True
+12.9426 	DATA 	Mouse: Left button down, pos=(859,502)
+12.9588 	EXP 	incorrectPol: autoDraw = False
+12.9588 	EXP 	verdaderoPol: autoDraw = False
+12.9588 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+12.9588 	EXP 	rewardState: autoDraw = True
+13.0592 	DATA 	Mouse: Left button up, pos=(859,502)
+13.9756 	EXP 	rewardState: autoDraw = False
+13.9756 	EXP 	rewardState: autoDraw = False
+13.9756 	EXP 	interTrialPol: autoDraw = True
+15.9599 	EXP 	New trial (rep=2, index=0): None
+15.9760 	EXP 	interTrialPol: autoDraw = False
+15.9760 	EXP 	interTrialPol: autoDraw = False
+15.9760 	EXP 	verdaderoPol: pos = [-0.5, 0]
+15.9760 	EXP 	incorrectPol: pos = [-0.5, 0]
+15.9760 	EXP 	incorrectPol: autoDraw = True
+15.9760 	EXP 	verdaderoPol: autoDraw = True
+16.2761 	DATA 	Keypress: escape

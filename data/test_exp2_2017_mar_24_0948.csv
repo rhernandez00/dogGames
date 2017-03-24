@@ -1,0 +1,4 @@
+trials.thisRepN,trials.thisTrialN,trials.thisN,trials.thisIndex,trials.thisTrial,mouse.x,mouse.y,mouse.leftButton,mouse.midButton,mouse.rightButton,mouse.time,date,frameRate,expName,session,participant,
+0,0,0,0,None,-0.40234375,0.171875,1,0,0,1.35390013502,2017_mar_24_0948,60.2040457859,exp2,001,test,
+1,0,1,0,None,-0.4375,0.390625,1,0,0,0.850061511979,2017_mar_24_0948,60.2040457859,exp2,001,test,
+2,0,2,0,None,-0.478515625,0.471354166667,1,0,0,0.728604529032,2017_mar_24_0948,60.2040457859,exp2,001,test,

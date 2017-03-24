@@ -48,19 +48,19 @@ dataArduino = serial.Serial('com8',9600,timeout=1)
 #dataArduino.write(str(rotTube))
 
 def reward():
-    global nPelletsGiven
-    global rotTube
-    global tube
-    dataArduino.write(str(outCord))
-    nPelletsGiven += 1
-    if nPelletsGiven >= nPelletsMax:
-        nPelletsGiven = 1
-        tube += 1
-        if tube > 4:
-            tube = 1
-        rotTube = tubesCord[tube-1]
-    print 'tubo: ' + str(rotTube)
-    print 'pellets: ' + str(nPelletsGiven)
+    #global nPelletsGiven
+    #global rotTube
+    #global tube
+    dataArduino.write(str(132))
+    #nPelletsGiven += 1
+    #if nPelletsGiven >= nPelletsMax:
+    #    nPelletsGiven = 1
+    #    tube += 1
+    #    if tube > 4:
+    #        tube = 1
+    #    rotTube = tubesCord[tube-1]
+    #print 'tubo: ' + str(rotTube)
+    #print 'pellets: ' + str(nPelletsGiven)
     
         
 time.sleep(2)    
@@ -116,14 +116,14 @@ yCorrectMax = 1
 
 trialClock = core.Clock()
 incorrectPol = visual.Rect(win=win, name='incorrectPol',
-    width=[1, 2][0], height=[1, 2][1],
+    width=[0.1, 2][0], height=[1, 2][1],
     ori=0, pos=[-0.5, 0],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
     fillColor=[1,0,0], fillColorSpace='rgb',
     opacity=1,depth=0.0, 
 interpolate=True)
 verdaderoPol = visual.Rect(win=win, name='verdaderoPol',
-    width=[1, 2][0], height=[1, 2][1],
+    width=[2, 2][0], height=[2, 2][1],
     ori=0, pos=[0.5, 0],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
     fillColor=[0,1,0], fillColorSpace='rgb',
@@ -172,13 +172,13 @@ for thisTrial in trials:
     side = randint(low=2,size=1)
     if side == 0:
         verdaderoPol.pos = [-0.5,0]
-        incorrectPol.pos = [0.5,0]
+        incorrectPol.pos = [-1,0]
         xCorrectMin = -1
-        xCorrectMax = 0
+        xCorrectMax = 1
     else:
-        verdaderoPol.pos = [0.5,0]
-        incorrectPol.pos = [-0.5,0]
-        xCorrectMin = 0
+        verdaderoPol.pos = [-0.5,0]
+        incorrectPol.pos = [-1,0]
+        xCorrectMin = -1
         xCorrectMax = 1
     
     currentLoop = trials
@@ -294,7 +294,7 @@ for thisTrial in trials:
     correctFeedClock.reset()  # clock
     frameN = -1
     continueRoutine = True
-    routineTimer.add(3.000000)
+    routineTimer.add(4.000000)
     # update component parameters for each repeat
     # keep track of which components have finished
     correctFeedComponents = [rewardState]

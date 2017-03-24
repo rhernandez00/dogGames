@@ -1,0 +1,387 @@
+2.2351 	ERROR 	avbin.dll failed to load.
+                     Try importing psychopy.visual as the first library
+                     (before anything that uses scipy)
+                     and make sure that avbin is installed.
+2.2793 	ERROR 	avbin.dll failed to load.
+                     Try importing psychopy.visual as the first library
+                     (before anything that uses scipy)
+                     and make sure that avbin is installed.
+7.1974 	WARNING 	User requested fullscreen with size [800 480], but screen is actually [1024, 768]. Using actual size
+9.0322 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, bitsMode=UNKNOWN, blendMode='avg', color=array([-1., -1., -1.]), colorSpace='rgb', fullscr=UNKNOWN, gamma=None, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor instance at 0x0921EA80>, name='window1', pos=[0, 0], screen=0, size=array([1024,  768]), stereo=False, units=u'norm', useFBO=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+9.0323 	EXP 	window1: recordFrameIntervals = False
+9.1979 	EXP 	window1: recordFrameIntervals = True
+9.3866 	WARNING 	t of last frame was 21.60ms (=1/46)
+9.5818 	EXP 	window1: recordFrameIntervals = False
+9.5824 	EXP 	<method-wrapper '__getattribute__' of attributeSetter object at 0x05F47170>: vertices = array([[-0.05,  1.  ],
+       [ 0.05,  1.  ],
+       [ 0.05, -1.  ],
+       [-0.05, -1.  ]])
+9.5854 	EXP 	Created incorrectPol = Rect(autoDraw=False, autoLog=True, closeShape=True, contrast=1.0, depth=0.0, fillColor=array([ 1.,  0.,  0.]), fillColorSpace='rgb', fillRGB=array([ 1.,  0.,  0.]), interpolate=True, lineColor=array([ 1.,  1.,  1.]), lineColorSpace='rgb', lineRGB=array([ 1.,  1.,  1.]), lineWidth=1, name='incorrectPol', opacity=1.0, ori=array(0.0), pos=array([-0.5,  0. ]), size=array([ 1.,  1.]), units=u'norm', vertices=ndarray(...), win=Window(...))
+9.5860 	EXP 	<method-wrapper '__getattribute__' of attributeSetter object at 0x05F47170>: vertices = array([[-1.,  1.],
+       [ 1.,  1.],
+       [ 1., -1.],
+       [-1., -1.]])
+9.5889 	EXP 	Created verdaderoPol = Rect(autoDraw=False, autoLog=True, closeShape=True, contrast=1.0, depth=-1.0, fillColor=array([ 0.,  1.,  0.]), fillColorSpace='rgb', fillRGB=array([ 0.,  1.,  0.]), interpolate=True, lineColor=array([ 1.,  1.,  1.]), lineColorSpace='rgb', lineRGB=array([ 1.,  1.,  1.]), lineWidth=1, name='verdaderoPol', opacity=1.0, ori=array(0.0), pos=array([ 0.5,  0. ]), size=array([ 1.,  1.]), units=u'norm', vertices=ndarray(...), win=Window(...))
+9.5895 	EXP 	<method-wrapper '__getattribute__' of attributeSetter object at 0x05F47170>: vertices = array([[-1.,  1.],
+       [ 1.,  1.],
+       [ 1., -1.],
+       [-1., -1.]])
+9.5924 	EXP 	Created rewardState = Rect(autoDraw=False, autoLog=True, closeShape=True, contrast=1.0, depth=0.0, fillColor=array([ 0.,  0.,  1.]), fillColorSpace='rgb', fillRGB=array([ 0.,  0.,  1.]), interpolate=True, lineColor=array([ 1.,  1.,  1.]), lineColorSpace='rgb', lineRGB=array([ 1.,  1.,  1.]), lineWidth=1, name='rewardState', opacity=1.0, ori=array(0.0), pos=array([ 0.,  0.]), size=array([ 1.,  1.]), units=u'norm', vertices=ndarray(...), win=Window(...))
+9.5928 	EXP 	<method-wrapper '__getattribute__' of attributeSetter object at 0x05F47170>: vertices = array([[-1.,  1.],
+       [ 1.,  1.],
+       [ 1., -1.],
+       [-1., -1.]])
+9.5958 	EXP 	Created interTrialPol = Rect(autoDraw=False, autoLog=True, closeShape=True, contrast=1.0, depth=0.0, fillColor=array([-1., -1., -1.]), fillColorSpace='rgb', fillRGB=array([-1., -1., -1.]), interpolate=True, lineColor=array([-1., -1., -1.]), lineColorSpace='rgb', lineRGB=array([-1., -1., -1.]), lineWidth=1, name='interTrialPol', opacity=1.0, ori=array(0.0), pos=array([ 0.,  0.]), size=array([ 1.,  1.]), units=u'norm', vertices=ndarray(...), win=Window(...))
+9.5967 	EXP 	Created sequence: random, trialTypes=1, nReps=50, seed=None
+9.6781 	EXP 	New trial (rep=0, index=0): None
+9.6838 	EXP 	verdaderoPol: pos = [-0.5, 0]
+9.6838 	EXP 	incorrectPol: pos = [-1, 0]
+9.6838 	EXP 	incorrectPol: autoDraw = True
+9.6838 	EXP 	verdaderoPol: autoDraw = True
+11.0490 	DATA 	Mouse: Left button down, pos=(613,359)
+11.0656 	EXP 	incorrectPol: autoDraw = False
+11.0656 	EXP 	verdaderoPol: autoDraw = False
+11.0656 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+11.0656 	EXP 	rewardState: autoDraw = True
+11.1658 	DATA 	Mouse: Left button up, pos=(613,359)
+12.0821 	EXP 	rewardState: autoDraw = False
+12.0821 	EXP 	rewardState: autoDraw = False
+12.0821 	EXP 	interTrialPol: autoDraw = True
+14.0665 	EXP 	New trial (rep=1, index=0): None
+14.0820 	EXP 	interTrialPol: autoDraw = False
+14.0820 	EXP 	interTrialPol: autoDraw = False
+14.0820 	EXP 	verdaderoPol: pos = [-0.5, 0]
+14.0820 	EXP 	incorrectPol: pos = [-1, 0]
+14.0820 	EXP 	incorrectPol: autoDraw = True
+14.0820 	EXP 	verdaderoPol: autoDraw = True
+61.9284 	DATA 	Mouse: Left button down, pos=(213,364)
+61.9286 	DATA 	Mouse: Left button up, pos=(213,364)
+63.0774 	DATA 	Mouse: Left button down, pos=(247,538)
+63.0948 	EXP 	incorrectPol: autoDraw = False
+63.0948 	EXP 	verdaderoPol: autoDraw = False
+63.0948 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+63.0948 	EXP 	rewardState: autoDraw = True
+63.1119 	DATA 	Mouse: Left button up, pos=(247,538)
+64.1100 	EXP 	rewardState: autoDraw = False
+64.1100 	EXP 	rewardState: autoDraw = False
+64.1100 	EXP 	interTrialPol: autoDraw = True
+66.0918 	EXP 	New trial (rep=2, index=0): None
+66.1069 	EXP 	interTrialPol: autoDraw = False
+66.1069 	EXP 	interTrialPol: autoDraw = False
+66.1069 	EXP 	verdaderoPol: pos = [-0.5, 0]
+66.1069 	EXP 	incorrectPol: pos = [-1, 0]
+66.1069 	EXP 	incorrectPol: autoDraw = True
+66.1069 	EXP 	verdaderoPol: autoDraw = True
+68.0780 	DATA 	Mouse: Left button down, pos=(191,257)
+68.0937 	EXP 	incorrectPol: autoDraw = False
+68.0937 	EXP 	verdaderoPol: autoDraw = False
+68.0937 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+68.0937 	EXP 	rewardState: autoDraw = True
+68.1102 	DATA 	Mouse: Left button up, pos=(191,257)
+69.1082 	EXP 	rewardState: autoDraw = False
+69.1082 	EXP 	rewardState: autoDraw = False
+69.1082 	EXP 	interTrialPol: autoDraw = True
+71.0942 	EXP 	New trial (rep=3, index=0): None
+71.1084 	EXP 	interTrialPol: autoDraw = False
+71.1084 	EXP 	interTrialPol: autoDraw = False
+71.1084 	EXP 	verdaderoPol: pos = [-0.5, 0]
+71.1084 	EXP 	incorrectPol: pos = [-1, 0]
+71.1084 	EXP 	incorrectPol: autoDraw = True
+71.1084 	EXP 	verdaderoPol: autoDraw = True
+72.1429 	DATA 	Mouse: Left button down, pos=(183,339)
+72.1476 	DATA 	Mouse: Left button up, pos=(183,339)
+72.1581 	EXP 	incorrectPol: autoDraw = False
+72.1581 	EXP 	verdaderoPol: autoDraw = False
+72.1581 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+72.1581 	EXP 	rewardState: autoDraw = True
+73.1745 	EXP 	rewardState: autoDraw = False
+73.1745 	EXP 	rewardState: autoDraw = False
+73.1745 	EXP 	interTrialPol: autoDraw = True
+75.1597 	EXP 	New trial (rep=4, index=0): None
+75.1760 	EXP 	interTrialPol: autoDraw = False
+75.1760 	EXP 	interTrialPol: autoDraw = False
+75.1760 	EXP 	verdaderoPol: pos = [-0.5, 0]
+75.1760 	EXP 	incorrectPol: pos = [-1, 0]
+75.1760 	EXP 	incorrectPol: autoDraw = True
+75.1760 	EXP 	verdaderoPol: autoDraw = True
+76.6645 	DATA 	Mouse: Left button down, pos=(318,451)
+76.6696 	DATA 	Mouse: Left button up, pos=(318,451)
+76.6770 	EXP 	incorrectPol: autoDraw = False
+76.6770 	EXP 	verdaderoPol: autoDraw = False
+76.6770 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+76.6770 	EXP 	rewardState: autoDraw = True
+77.6926 	EXP 	rewardState: autoDraw = False
+77.6926 	EXP 	rewardState: autoDraw = False
+77.6926 	EXP 	interTrialPol: autoDraw = True
+79.6750 	EXP 	New trial (rep=5, index=0): None
+79.6887 	EXP 	interTrialPol: autoDraw = False
+79.6887 	EXP 	interTrialPol: autoDraw = False
+79.6887 	EXP 	verdaderoPol: pos = [-0.5, 0]
+79.6887 	EXP 	incorrectPol: pos = [-1, 0]
+79.6887 	EXP 	incorrectPol: autoDraw = True
+79.6887 	EXP 	verdaderoPol: autoDraw = True
+80.7716 	DATA 	Mouse: Left button down, pos=(184,404)
+80.7719 	DATA 	Mouse: Left button up, pos=(184,404)
+81.8925 	DATA 	Mouse: Left button down, pos=(228,458)
+81.8927 	DATA 	Mouse: Left button up, pos=(228,458)
+82.6938 	DATA 	Mouse: Left button down, pos=(331,389)
+82.7081 	EXP 	incorrectPol: autoDraw = False
+82.7081 	EXP 	verdaderoPol: autoDraw = False
+82.7081 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+82.7081 	EXP 	rewardState: autoDraw = True
+82.7277 	DATA 	Mouse: Left button up, pos=(331,389)
+83.7237 	EXP 	rewardState: autoDraw = False
+83.7237 	EXP 	rewardState: autoDraw = False
+83.7237 	EXP 	interTrialPol: autoDraw = True
+85.7084 	EXP 	New trial (rep=6, index=0): None
+85.7236 	EXP 	interTrialPol: autoDraw = False
+85.7236 	EXP 	interTrialPol: autoDraw = False
+85.7236 	EXP 	verdaderoPol: pos = [-0.5, 0]
+85.7236 	EXP 	incorrectPol: pos = [-1, 0]
+85.7236 	EXP 	incorrectPol: autoDraw = True
+85.7236 	EXP 	verdaderoPol: autoDraw = True
+86.5474 	DATA 	Mouse: Left button down, pos=(209,397)
+86.5530 	DATA 	Mouse: Left button up, pos=(209,397)
+86.5628 	EXP 	incorrectPol: autoDraw = False
+86.5628 	EXP 	verdaderoPol: autoDraw = False
+86.5628 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+86.5628 	EXP 	rewardState: autoDraw = True
+87.5731 	EXP 	rewardState: autoDraw = False
+87.5731 	EXP 	rewardState: autoDraw = False
+87.5731 	EXP 	interTrialPol: autoDraw = True
+89.5602 	EXP 	New trial (rep=7, index=0): None
+89.5755 	EXP 	interTrialPol: autoDraw = False
+89.5755 	EXP 	interTrialPol: autoDraw = False
+89.5755 	EXP 	verdaderoPol: pos = [-0.5, 0]
+89.5755 	EXP 	incorrectPol: pos = [-1, 0]
+89.5755 	EXP 	incorrectPol: autoDraw = True
+89.5755 	EXP 	verdaderoPol: autoDraw = True
+90.7246 	DATA 	Mouse: Left button down, pos=(310,371)
+90.7403 	EXP 	incorrectPol: autoDraw = False
+90.7403 	EXP 	verdaderoPol: autoDraw = False
+90.7403 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+90.7403 	EXP 	rewardState: autoDraw = True
+90.7409 	DATA 	Mouse: Left button up, pos=(310,371)
+91.7559 	EXP 	rewardState: autoDraw = False
+91.7559 	EXP 	rewardState: autoDraw = False
+91.7559 	EXP 	interTrialPol: autoDraw = True
+93.7410 	EXP 	New trial (rep=8, index=0): None
+93.7563 	EXP 	interTrialPol: autoDraw = False
+93.7563 	EXP 	interTrialPol: autoDraw = False
+93.7563 	EXP 	verdaderoPol: pos = [-0.5, 0]
+93.7563 	EXP 	incorrectPol: pos = [-1, 0]
+93.7563 	EXP 	incorrectPol: autoDraw = True
+93.7563 	EXP 	verdaderoPol: autoDraw = True
+99.5581 	DATA 	Mouse: Left button down, pos=(336,343)
+99.5785 	EXP 	incorrectPol: autoDraw = False
+99.5785 	EXP 	verdaderoPol: autoDraw = False
+99.5785 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+99.5785 	EXP 	rewardState: autoDraw = True
+99.6075 	DATA 	Mouse: Left button up, pos=(336,343)
+100.5887 	EXP 	rewardState: autoDraw = False
+100.5887 	EXP 	rewardState: autoDraw = False
+100.5887 	EXP 	interTrialPol: autoDraw = True
+102.5731 	EXP 	New trial (rep=9, index=0): None
+102.5884 	EXP 	interTrialPol: autoDraw = False
+102.5884 	EXP 	interTrialPol: autoDraw = False
+102.5884 	EXP 	verdaderoPol: pos = [-0.5, 0]
+102.5884 	EXP 	incorrectPol: pos = [-1, 0]
+102.5884 	EXP 	incorrectPol: autoDraw = True
+102.5884 	EXP 	verdaderoPol: autoDraw = True
+103.5729 	DATA 	Mouse: Left button down, pos=(428,189)
+103.5897 	EXP 	incorrectPol: autoDraw = False
+103.5897 	EXP 	verdaderoPol: autoDraw = False
+103.5897 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+103.5897 	EXP 	rewardState: autoDraw = True
+103.6081 	DATA 	Mouse: Left button up, pos=(428,189)
+104.6057 	EXP 	rewardState: autoDraw = False
+104.6057 	EXP 	rewardState: autoDraw = False
+104.6057 	EXP 	interTrialPol: autoDraw = True
+106.5894 	EXP 	New trial (rep=10, index=0): None
+106.6048 	EXP 	interTrialPol: autoDraw = False
+106.6048 	EXP 	interTrialPol: autoDraw = False
+106.6048 	EXP 	verdaderoPol: pos = [-0.5, 0]
+106.6048 	EXP 	incorrectPol: pos = [-1, 0]
+106.6048 	EXP 	incorrectPol: autoDraw = True
+106.6048 	EXP 	verdaderoPol: autoDraw = True
+107.7518 	DATA 	Mouse: Left button down, pos=(283,327)
+107.7673 	EXP 	incorrectPol: autoDraw = False
+107.7673 	EXP 	verdaderoPol: autoDraw = False
+107.7673 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+107.7673 	EXP 	rewardState: autoDraw = True
+107.8011 	DATA 	Mouse: Left button up, pos=(283,327)
+108.7878 	EXP 	rewardState: autoDraw = False
+108.7878 	EXP 	rewardState: autoDraw = False
+108.7878 	EXP 	interTrialPol: autoDraw = True
+110.7721 	EXP 	New trial (rep=11, index=0): None
+110.7875 	EXP 	interTrialPol: autoDraw = False
+110.7875 	EXP 	interTrialPol: autoDraw = False
+110.7875 	EXP 	verdaderoPol: pos = [-0.5, 0]
+110.7875 	EXP 	incorrectPol: pos = [-1, 0]
+110.7875 	EXP 	incorrectPol: autoDraw = True
+110.7875 	EXP 	verdaderoPol: autoDraw = True
+112.1462 	DATA 	Mouse: Left button down, pos=(448,266)
+112.1614 	EXP 	incorrectPol: autoDraw = False
+112.1614 	EXP 	verdaderoPol: autoDraw = False
+112.1614 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+112.1614 	EXP 	rewardState: autoDraw = True
+112.1622 	DATA 	Mouse: Left button up, pos=(448,266)
+113.1651 	EXP 	rewardState: autoDraw = False
+113.1651 	EXP 	rewardState: autoDraw = False
+113.1651 	EXP 	interTrialPol: autoDraw = True
+115.1603 	EXP 	New trial (rep=12, index=0): None
+115.1739 	EXP 	interTrialPol: autoDraw = False
+115.1739 	EXP 	interTrialPol: autoDraw = False
+115.1739 	EXP 	verdaderoPol: pos = [-0.5, 0]
+115.1739 	EXP 	incorrectPol: pos = [-1, 0]
+115.1739 	EXP 	incorrectPol: autoDraw = True
+115.1739 	EXP 	verdaderoPol: autoDraw = True
+127.8048 	DATA 	Mouse: Left button down, pos=(448,266)
+127.8121 	DATA 	Mouse: Left button up, pos=(448,266)
+127.8249 	EXP 	incorrectPol: autoDraw = False
+127.8249 	EXP 	verdaderoPol: autoDraw = False
+127.8249 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+127.8249 	EXP 	rewardState: autoDraw = True
+128.8363 	EXP 	rewardState: autoDraw = False
+128.8363 	EXP 	rewardState: autoDraw = False
+128.8363 	EXP 	interTrialPol: autoDraw = True
+130.8233 	EXP 	New trial (rep=13, index=0): None
+130.8377 	EXP 	interTrialPol: autoDraw = False
+130.8377 	EXP 	interTrialPol: autoDraw = False
+130.8377 	EXP 	verdaderoPol: pos = [-0.5, 0]
+130.8377 	EXP 	incorrectPol: pos = [-1, 0]
+130.8377 	EXP 	incorrectPol: autoDraw = True
+130.8377 	EXP 	verdaderoPol: autoDraw = True
+136.3710 	DATA 	Mouse: Left button down, pos=(448,266)
+136.3849 	EXP 	incorrectPol: autoDraw = False
+136.3849 	EXP 	verdaderoPol: autoDraw = False
+136.3849 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+136.3849 	EXP 	rewardState: autoDraw = True
+136.3853 	DATA 	Mouse: Left button up, pos=(448,266)
+137.4034 	EXP 	rewardState: autoDraw = False
+137.4034 	EXP 	rewardState: autoDraw = False
+137.4034 	EXP 	interTrialPol: autoDraw = True
+139.3874 	EXP 	New trial (rep=14, index=0): None
+139.4074 	EXP 	interTrialPol: autoDraw = False
+139.4074 	EXP 	interTrialPol: autoDraw = False
+139.4074 	EXP 	verdaderoPol: pos = [-0.5, 0]
+139.4074 	EXP 	incorrectPol: pos = [-1, 0]
+139.4074 	EXP 	incorrectPol: autoDraw = True
+139.4074 	EXP 	verdaderoPol: autoDraw = True
+143.7704 	DATA 	Mouse: Left button down, pos=(448,266)
+143.7707 	DATA 	Mouse: Left button up, pos=(448,266)
+145.7034 	DATA 	Mouse: Left button down, pos=(448,266)
+145.7187 	EXP 	incorrectPol: autoDraw = False
+145.7187 	EXP 	verdaderoPol: autoDraw = False
+145.7187 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+145.7187 	EXP 	rewardState: autoDraw = True
+145.7522 	DATA 	Mouse: Left button up, pos=(448,266)
+146.7358 	EXP 	rewardState: autoDraw = False
+146.7358 	EXP 	rewardState: autoDraw = False
+146.7358 	EXP 	interTrialPol: autoDraw = True
+148.7348 	EXP 	New trial (rep=15, index=0): None
+148.7689 	EXP 	interTrialPol: autoDraw = False
+148.7689 	EXP 	interTrialPol: autoDraw = False
+148.7689 	EXP 	verdaderoPol: pos = [-0.5, 0]
+148.7689 	EXP 	incorrectPol: pos = [-1, 0]
+148.7689 	EXP 	incorrectPol: autoDraw = True
+148.7689 	EXP 	verdaderoPol: autoDraw = True
+153.4053 	DATA 	Mouse: Left button down, pos=(448,266)
+153.4098 	DATA 	Mouse: Left button up, pos=(448,266)
+153.4216 	EXP 	incorrectPol: autoDraw = False
+153.4216 	EXP 	verdaderoPol: autoDraw = False
+153.4216 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+153.4216 	EXP 	rewardState: autoDraw = True
+154.4340 	EXP 	rewardState: autoDraw = False
+154.4340 	EXP 	rewardState: autoDraw = False
+154.4340 	EXP 	interTrialPol: autoDraw = True
+156.4197 	EXP 	New trial (rep=16, index=0): None
+156.4341 	EXP 	interTrialPol: autoDraw = False
+156.4341 	EXP 	interTrialPol: autoDraw = False
+156.4341 	EXP 	verdaderoPol: pos = [-0.5, 0]
+156.4341 	EXP 	incorrectPol: pos = [-1, 0]
+156.4341 	EXP 	incorrectPol: autoDraw = True
+156.4341 	EXP 	verdaderoPol: autoDraw = True
+161.7181 	DATA 	Mouse: Left button down, pos=(448,266)
+161.7344 	EXP 	incorrectPol: autoDraw = False
+161.7344 	EXP 	verdaderoPol: autoDraw = False
+161.7344 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+161.7344 	EXP 	rewardState: autoDraw = True
+161.8011 	DATA 	Mouse: Left button up, pos=(448,266)
+162.7501 	EXP 	rewardState: autoDraw = False
+162.7501 	EXP 	rewardState: autoDraw = False
+162.7501 	EXP 	interTrialPol: autoDraw = True
+164.7357 	EXP 	New trial (rep=17, index=0): None
+164.7508 	EXP 	interTrialPol: autoDraw = False
+164.7508 	EXP 	interTrialPol: autoDraw = False
+164.7508 	EXP 	verdaderoPol: pos = [-0.5, 0]
+164.7508 	EXP 	incorrectPol: pos = [-1, 0]
+164.7508 	EXP 	incorrectPol: autoDraw = True
+164.7508 	EXP 	verdaderoPol: autoDraw = True
+168.7524 	DATA 	Mouse: Left button down, pos=(448,266)
+168.7527 	DATA 	Mouse: Left button up, pos=(448,266)
+169.9338 	DATA 	Mouse: Left button down, pos=(448,266)
+169.9493 	EXP 	incorrectPol: autoDraw = False
+169.9493 	EXP 	verdaderoPol: autoDraw = False
+169.9493 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+169.9493 	EXP 	rewardState: autoDraw = True
+170.0001 	DATA 	Mouse: Left button up, pos=(448,266)
+170.9668 	EXP 	rewardState: autoDraw = False
+170.9668 	EXP 	rewardState: autoDraw = False
+170.9668 	EXP 	interTrialPol: autoDraw = True
+172.9518 	EXP 	New trial (rep=18, index=0): None
+172.9665 	EXP 	interTrialPol: autoDraw = False
+172.9665 	EXP 	interTrialPol: autoDraw = False
+172.9665 	EXP 	verdaderoPol: pos = [-0.5, 0]
+172.9665 	EXP 	incorrectPol: pos = [-1, 0]
+172.9665 	EXP 	incorrectPol: autoDraw = True
+172.9665 	EXP 	verdaderoPol: autoDraw = True
+177.0834 	DATA 	Mouse: Left button down, pos=(448,266)
+177.0994 	EXP 	incorrectPol: autoDraw = False
+177.0994 	EXP 	verdaderoPol: autoDraw = False
+177.0994 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+177.0994 	EXP 	rewardState: autoDraw = True
+177.1167 	DATA 	Mouse: Left button up, pos=(448,266)
+178.1159 	EXP 	rewardState: autoDraw = False
+178.1159 	EXP 	rewardState: autoDraw = False
+178.1159 	EXP 	interTrialPol: autoDraw = True
+180.1001 	EXP 	New trial (rep=19, index=0): None
+180.1160 	EXP 	interTrialPol: autoDraw = False
+180.1160 	EXP 	interTrialPol: autoDraw = False
+180.1160 	EXP 	verdaderoPol: pos = [-0.5, 0]
+180.1160 	EXP 	incorrectPol: pos = [-1, 0]
+180.1160 	EXP 	incorrectPol: autoDraw = True
+180.1160 	EXP 	verdaderoPol: autoDraw = True
+213.2133 	DATA 	Mouse: Left button down, pos=(448,266)
+213.2293 	EXP 	incorrectPol: autoDraw = False
+213.2293 	EXP 	verdaderoPol: autoDraw = False
+213.2293 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+213.2293 	EXP 	rewardState: autoDraw = True
+213.2625 	DATA 	Mouse: Left button up, pos=(448,266)
+214.2458 	EXP 	rewardState: autoDraw = False
+214.2458 	EXP 	rewardState: autoDraw = False
+214.2458 	EXP 	interTrialPol: autoDraw = True
+216.2297 	EXP 	New trial (rep=20, index=0): None
+216.2450 	EXP 	interTrialPol: autoDraw = False
+216.2450 	EXP 	interTrialPol: autoDraw = False
+216.2450 	EXP 	verdaderoPol: pos = [-0.5, 0]
+216.2450 	EXP 	incorrectPol: pos = [-1, 0]
+216.2450 	EXP 	incorrectPol: autoDraw = True
+216.2450 	EXP 	verdaderoPol: autoDraw = True
+224.2592 	DATA 	Mouse: Left button down, pos=(448,266)
+224.2755 	EXP 	incorrectPol: autoDraw = False
+224.2755 	EXP 	verdaderoPol: autoDraw = False
+224.2755 	EXP 	rewardState: fillColor = [0.0, 0.0, 1.0]
+224.2755 	EXP 	rewardState: autoDraw = True
+224.3753 	DATA 	Mouse: Left button up, pos=(448,266)
+225.2936 	EXP 	rewardState: autoDraw = False
+225.2936 	EXP 	rewardState: autoDraw = False
+225.2936 	EXP 	interTrialPol: autoDraw = True
+227.2798 	EXP 	New trial (rep=21, index=0): None
+227.2946 	EXP 	interTrialPol: autoDraw = False
+227.2946 	EXP 	interTrialPol: autoDraw = False
+227.2946 	EXP 	verdaderoPol: pos = [-0.5, 0]
+227.2946 	EXP 	incorrectPol: pos = [-1, 0]
+227.2946 	EXP 	incorrectPol: autoDraw = True
+227.2946 	EXP 	verdaderoPol: autoDraw = True
+237.8765 	DATA 	Keypress: escape

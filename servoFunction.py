@@ -29,26 +29,27 @@ for p in ports:
         nPort = 'com' + strTmp
         
 data = serial.Serial('com8',9600,timeout=1)   
-time.sleep(1)
-data.write(str(rotTube))
+#time.sleep(1)
+#data.write(str(rotTube))
 
 
 def reward():
-    global nPelletsGiven
-    global rotTube
-    global tube
-    data.write(str(outCord))
-    nPelletsGiven += 1
-    if nPelletsGiven >= nPelletsMax:
-        nPelletsGiven = 1
-        tube += 1
-        if tube > 4:
-            tube = 1
-        rotTube = tubesCord[tube-1]
-    print 'tubo: ' + str(rotTube)
-    print 'pellets: ' + str(nPelletsGiven)
-    time.sleep(2)
-    data.write(str(rotTube))
+    #global nPelletsGiven
+    #global rotTube
+    #global tube
+    #data.write(str(outCord))
+    data.write(str(99))
+#    nPelletsGiven += 1
+#    if nPelletsGiven >= nPelletsMax:
+#        nPelletsGiven = 1
+#        tube += 1
+#        if tube > 4:
+#            tube = 1
+#        rotTube = tubesCord[tube-1]
+#    print 'tubo: ' + str(rotTube)
+#    print 'pellets: ' + str(nPelletsGiven)
+#    time.sleep(2)
+#    data.write(str(rotTube))
         
 time.sleep(2)    
 data.write(str(rotTube))

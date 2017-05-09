@@ -2,7 +2,7 @@
  
 int pos=90; //declare initial position of the servo
 int servoPin = 9; //declare pin for the servo
-int servoDelay =2000; //delay to allow the servo to reach position;
+int servoDelay =3000; //delay to allow the servo to reach position;
 int outPos = 132;
 int inCord = 106;
 int inCords[] = {106,83,58,36};

@@ -19,7 +19,7 @@ import serial
 import serial.tools.list_ports
 import time
 
-nTrials = 50
+nTrials = 13
 
 
 #vars for servo
@@ -32,7 +32,7 @@ tubesCord = [106,83,58,36]
 rotTube = tubesCord[0]
 outCord = 132
 ports = list(serial.tools.list_ports.comports())
-
+intervalTime = 5.0000
 
 
 for p in ports:
@@ -51,7 +51,7 @@ def reward():
     #global nPelletsGiven
     #global rotTube
     #global tube
-    dataArduino.write(str(132))
+    dataArduino.write(str(99))
     #nPelletsGiven += 1
     #if nPelletsGiven >= nPelletsMax:
     #    nPelletsGiven = 1
@@ -63,8 +63,8 @@ def reward():
     #print 'pellets: ' + str(nPelletsGiven)
     
         
-time.sleep(2)    
-dataArduino.write(str(rotTube))
+#time.sleep(2)    
+#dataArduino.write(str(rotTube))
 
 
 # Ensure that relative paths start from the same directory as this script
@@ -294,7 +294,7 @@ for thisTrial in trials:
     correctFeedClock.reset()  # clock
     frameN = -1
     continueRoutine = True
-    routineTimer.add(4.000000)
+    routineTimer.add(8.000000)
     # update component parameters for each repeat
     # keep track of which components have finished
     correctFeedComponents = [rewardState]
@@ -343,13 +343,13 @@ for thisTrial in trials:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)    
     #reward set to 0
-    dataArduino.write(str(rotTube))
+    #dataArduino.write(str(rotTube))
     
     #------Prepare to start Routine "intervalInter"-------
     t = 0
     intervalInterClock.reset()  # clock 
     frameN = -1
-    routineTimer.add(1.000000)
+    routineTimer.add(intervalTime)
     # update component parameters for each repeat
     # keep track of which components have finished
     intervalInterComponents = []
@@ -397,6 +397,7 @@ for thisTrial in trials:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     thisExp.nextEntry()
+    time.sleep(2)
     
     
 # completed X repeats of 'trials'

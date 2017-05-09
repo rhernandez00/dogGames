@@ -26,14 +26,27 @@ nTrials = 13
 nPelletsMax = 13
 nTubes = 4
 
+testing = True
 tube = 1
 nPelletsGiven = 0
 tubesCord = [106,83,58,36]
 rotTube = tubesCord[0]
 outCord = 132
 ports = list(serial.tools.list_ports.comports())
-intervalTime = 5.0000
+intervalTime = 5.000000
+firstInterval = 1.000000
+correctWidth = 1 #max 2
+incorrectWidth = 1 
+correctHeight = 0.1 
+incorrectHeight = 1 
 
+
+if testing:
+    highV = 2
+    lowV = 1
+else:        
+    highV = 2
+    lowV = 0
 
 for p in ports:
     if "CH340" in p[1]:
@@ -42,16 +55,23 @@ for p in ports:
         strTmp = strTmp.replace('COM','')
         nPort = 'com' + strTmp
 
-#data = serial.Serial(nPort,9600,timeout=1)   
-dataArduino = serial.Serial('com8',9600,timeout=1)
+#data = serial.Serial(nPort,9600,timeout=1)  
+if testing:
+    print 'Fake arduino on'
+else:        
+    dataArduino = serial.Serial('com8',9600,timeout=1)
 #time.sleep(1)
 #dataArduino.write(str(rotTube))
 
 def reward():
     #global nPelletsGiven
     #global rotTube
-    #global tube
-    dataArduino.write(str(99))
+    global testing
+    
+    if testing:
+        print 'reward'
+    else:
+        dataArduino.write(str(99))
     #nPelletsGiven += 1
     #if nPelletsGiven >= nPelletsMax:
     #    nPelletsGiven = 1
@@ -116,14 +136,14 @@ yCorrectMax = 1
 
 trialClock = core.Clock()
 incorrectPol = visual.Rect(win=win, name='incorrectPol',
-    width=[0.1, 2][0], height=[1, 2][1],
+    width=[incorrectWidth, 2][0], height=[1, incorrectHeight][1],
     ori=0, pos=[-0.5, 0],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
     fillColor=[1,0,0], fillColorSpace='rgb',
     opacity=1,depth=0.0, 
 interpolate=True)
 verdaderoPol = visual.Rect(win=win, name='verdaderoPol',
-    width=[2, 2][0], height=[2, 2][1],
+    width=[correctWidth, 2][0], height=[1, correctHeight][1],
     ori=0, pos=[0.5, 0],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
     fillColor=[0,1,0], fillColorSpace='rgb',
@@ -169,18 +189,24 @@ if thisTrial != None:
         exec(paramName + '= thisTrial.' + paramName)
 
 for thisTrial in trials:
-    side = randint(low=2,size=1)
+    side = randint(high=highV,low=lowV,size=1)
     if side == 0:
+        verdaderoPol.pos = [0.5,0]
+        incorrectPol.pos = [-0.5,0]
+        #xCorrectMin = 0
+        #xCorrectMax = 1
+    elif side == 1:
         verdaderoPol.pos = [-0.5,0]
-        incorrectPol.pos = [-1,0]
-        xCorrectMin = -1
-        xCorrectMax = 1
+        incorrectPol.pos = [0.5,0]
+        #xCorrectMin = -1
+        #xCorrectMax = 0
     else:
         verdaderoPol.pos = [-0.5,0]
         incorrectPol.pos = [-1,0]
         xCorrectMin = -1
         xCorrectMax = 1
-    
+    xCorrectMin = verdaderoPol.pos[0] -0.5#- (verdaderoPol.width[1] - verdaderoPol.width[0])
+    xCorrectMax = verdaderoPol.pos[0] +0.5 #+ (verdaderoPol.width[1] - verdaderoPol.width[0])
     currentLoop = trials
     # abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
     if thisTrial != None:
@@ -294,7 +320,7 @@ for thisTrial in trials:
     correctFeedClock.reset()  # clock
     frameN = -1
     continueRoutine = True
-    routineTimer.add(8.000000)
+    routineTimer.add(firstInterval)
     # update component parameters for each repeat
     # keep track of which components have finished
     correctFeedComponents = [rewardState]

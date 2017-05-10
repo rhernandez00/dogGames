@@ -35,10 +35,17 @@ outCord = 132
 ports = list(serial.tools.list_ports.comports())
 intervalTime = 5.000000
 firstInterval = 1.000000
+
+
+#box parameters
 correctWidth = 1 #max 2
 incorrectWidth = 1 
 correctHeight = 1 
 incorrectHeight = 1 
+xHigh = 101
+xLow = 0
+yHigh = 101
+yLow = 0
 
 
 if testing:
@@ -188,16 +195,13 @@ if thisTrial != None:
 
 for thisTrial in trials:
     #choses from two possible positions a place to set the correct and incorrect
-    side = randint(high=highV,low=lowV,size=1)
-    if side == 0:
-        correctPol.pos = [0.5,0]
-        incorrectPol.pos = [-0.5,0]
-    elif side == 1:
-        correctPol.pos = [-0.5,0]
-        incorrectPol.pos = [0.5,0]
-    else:
-        correctPol.pos = [-0.5,0]
-        incorrectPol.pos = [-1,0]
+    
+    xPos = (randint(high=xHigh,low=xLow,size=1)/50.0) -1
+    yPos = (randint(high=yHigh,low=yLow,size=1)/50.0) -1
+    
+    correctPol.pos = [xPos[0],yPos[0]]
+    incorrectPol.pos = [2,2]
+    
 
     xCorrectMin = correctPol.pos[0] -correctWidth/2 
     xCorrectMax = correctPol.pos[0] +correctWidth/2

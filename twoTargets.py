@@ -33,17 +33,24 @@ tubesCord = [106,83,58,36]
 rotTube = tubesCord[0]
 outCord = 132
 ports = list(serial.tools.list_ports.comports())
-intervalTime = 5.000000
-firstInterval = 1.000000
-correctWidth = 1 #max 2
-incorrectWidth = 1 
-correctHeight = 1 
-incorrectHeight = 1 
+intervalTime = 2.000000
+correctFeedback = 1.000000
+
+
+#--- box parameters---
+
+incorrectWidth = 0.4 
+incorrectHeight = 0.4 
+incorrectColor = [1,1,0]
+
+correctColor = [0,0,1]
+correctHeight = 0.4
+correctWidth = 0.4 #max 2
 
 
 if testing:
     highV = 2
-    lowV = 1
+    lowV = 0
 else:        
     highV = 2
     lowV = 0
@@ -109,8 +116,11 @@ thisExp = data.ExperimentHandler(name=expName, version='',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 #save a log file for detail verbose info
-logFile = logging.LogFile(filename+'.log', level=logging.EXP)
-logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
+
+
+# LOG experiment
+#logFile = logging.LogFile(filename+'.log', level=logging.EXP)
+#logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
 
 endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
@@ -137,14 +147,14 @@ incorrectPol = visual.Rect(win=win, name='incorrectPol',
     width=[incorrectWidth, 2][0], height=[1, incorrectHeight][1],
     ori=0, pos=[-0.5, 0],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
-    fillColor=[1,0,0], fillColorSpace='rgb',
+    fillColor=incorrectColor, fillColorSpace='rgb',
     opacity=1,depth=0.0, 
 interpolate=True)
 correctPol = visual.Rect(win=win, name='correctPol',
     width=[correctWidth, 2][0], height=[1, correctHeight][1],
     ori=0, pos=[0.5, 0],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
-    fillColor=[0,1,0], fillColorSpace='rgb',
+    fillColor=correctColor, fillColorSpace='rgb',
     opacity=1,depth=-1.0, 
 interpolate=True)
 mouse = event.Mouse(win=win)
@@ -325,7 +335,7 @@ for thisTrial in trials:
     correctFeedClock.reset()  # clock
     frameN = -1
     continueRoutine = True
-    routineTimer.add(firstInterval)
+    routineTimer.add(correctFeedback)
     # update component parameters for each repeat
     # keep track of which components have finished
     correctFeedComponents = [rewardState]
@@ -349,7 +359,7 @@ for thisTrial in trials:
             rewardState.tStart = t
             rewardState.frameNStart = frameN  # exact frame index
             rewardState.setAutoDraw(True)
-        elif rewardState.status == STARTED and t >= (0.0 + 1.0):
+        elif rewardState.status == STARTED and t >= (0.0 + correctFeedback):
             rewardState.setAutoDraw(False)
         
         # check if all components have finished
@@ -403,7 +413,7 @@ for thisTrial in trials:
             interTrialPol.tStart = t  # underestimates by a little under one frame
             interTrialPol.frameNStart = frameN  # exact frame index
             interTrialPol.setAutoDraw(True)
-        if interTrialPol.status == STARTED and t >= (0.0 + (2-win.monitorFramePeriod*0.75)): #most of one frame period left
+        if interTrialPol.status == STARTED and t >= (0.0 + (intervalTime-win.monitorFramePeriod*0.75)): #most of one frame period left
             interTrialPol.setAutoDraw(False)
         
         # check if all components have finished
@@ -427,7 +437,8 @@ for thisTrial in trials:
     for thisComponent in intervalInterComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    thisExp.nextEntry()
+    # LOG experiment
+    #thisExp.nextEntry()
     time.sleep(2)
     
     

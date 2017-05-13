@@ -34,18 +34,19 @@ rotTube = tubesCord[0]
 outCord = 132
 ports = list(serial.tools.list_ports.comports())
 intervalTime = 5.000000
-firstInterval = 1.000000
+correctFeedback = 1.0
 
 
 #box parameters
-correctWidth = 1 #max 2
-incorrectWidth = 1 
-correctHeight = 1 
-incorrectHeight = 1 
-xHigh = 101
-xLow = 0
-yHigh = 101
-yLow = 0
+correctWidth = 0.2 #max 2
+incorrectWidth = 0.2 
+correctHeight = 0.2 
+incorrectHeight = 0.2 
+# range of possible positions
+xHigh = 85
+xLow = 20
+yHigh = 85
+yLow = 20
 
 
 if testing:
@@ -329,7 +330,7 @@ for thisTrial in trials:
     correctFeedClock.reset()  # clock
     frameN = -1
     continueRoutine = True
-    routineTimer.add(firstInterval)
+    routineTimer.add(correctFeedback)
     # update component parameters for each repeat
     # keep track of which components have finished
     correctFeedComponents = [rewardState]
@@ -353,7 +354,7 @@ for thisTrial in trials:
             rewardState.tStart = t
             rewardState.frameNStart = frameN  # exact frame index
             rewardState.setAutoDraw(True)
-        elif rewardState.status == STARTED and t >= (0.0 + 1.0):
+        elif rewardState.status == STARTED and t >= (0.0 + correctFeedback):
             rewardState.setAutoDraw(False)
         
         # check if all components have finished
@@ -407,7 +408,7 @@ for thisTrial in trials:
             interTrialPol.tStart = t  # underestimates by a little under one frame
             interTrialPol.frameNStart = frameN  # exact frame index
             interTrialPol.setAutoDraw(True)
-        if interTrialPol.status == STARTED and t >= (0.0 + (2-win.monitorFramePeriod*0.75)): #most of one frame period left
+        if interTrialPol.status == STARTED and t >= (0.0 + (intervalTime-win.monitorFramePeriod*0.75)): #most of one frame period left
             interTrialPol.setAutoDraw(False)
         
         # check if all components have finished

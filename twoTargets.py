@@ -27,6 +27,7 @@ nPelletsMax = 13
 nTubes = 4
 
 testing = True
+raspberry = 0 #either working with raspberry (1) or not (0)
 tube = 1
 nPelletsGiven = 0
 tubesCord = [106,83,58,36]
@@ -34,7 +35,7 @@ rotTube = tubesCord[0]
 outCord = 132
 ports = list(serial.tools.list_ports.comports())
 intervalTime = 2.000000
-correctFeedback = 1.000000
+
 
 
 #--- box parameters---
@@ -42,10 +43,14 @@ correctFeedback = 1.000000
 incorrectWidth = 0.4 
 incorrectHeight = 0.4 
 incorrectColor = [1,1,0]
+incorrectTime = 3.0
+intervalIncorrect = 0.5
 
 correctColor = [0,0,1]
 correctHeight = 0.4
 correctWidth = 0.4 #max 2
+correctTime = 3.0
+intervalCorrect = 0.5
 
 
 if testing:
@@ -65,34 +70,26 @@ for p in ports:
 #data = serial.Serial(nPort,9600,timeout=1)  
 if testing:
     print 'Fake arduino on'
+elif raspberry == 1:
+    dataArduino = serial.Serial('/dev/ttyUSB0',9600,timeout=1)
 else:        
     dataArduino = serial.Serial('com8',9600,timeout=1)
-#time.sleep(1)
-#dataArduino.write(str(rotTube))
+
 
 def reward():
-    #global nPelletsGiven
-    #global rotTube
     global testing
-    
     if testing:
         print 'reward'
     else:
         dataArduino.write(str(99))
-    #nPelletsGiven += 1
-    #if nPelletsGiven >= nPelletsMax:
-    #    nPelletsGiven = 1
-    #    tube += 1
-    #    if tube > 4:
-    #        tube = 1
-    #    rotTube = tubesCord[tube-1]
-    #print 'tubo: ' + str(rotTube)
-    #print 'pellets: ' + str(nPelletsGiven)
-    
-        
-#time.sleep(2)    
-#dataArduino.write(str(rotTube))
 
+def water():
+    global testing
+    if testing:
+        print 'water'
+    else:
+        dataArduino.write(str(88))
+    
 
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
@@ -113,7 +110,7 @@ filename = _thisDir + os.sep + 'data/%s_%s_%s' %(expInfo['participant'], expName
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
     originPath=None,
-    savePickle=True, saveWideText=True,
+    savePickle=False, saveWideText=False,
     dataFileName=filename)
 #save a log file for detail verbose info
 
@@ -323,12 +320,17 @@ for thisTrial in trials:
     
     if ((x < xCorrectMax) & (x > xCorrectMin)) & ((y < yCorrectMax) & (y > yCorrectMin)):
         rewardState.fillColor = [0.,0.,1.]
+        correctFeedback = correctTime
         reward()
         rewardReset = 1
+        intervalTime = intervalCorrect
         #time.sleep(2)
         
     else:
         rewardState.fillColor = [0.8,0.,0.]
+        correctFeedback = incorrectTime
+        intervalTime = intervalIncorrect
+        water()
         
     # ------Prepare to start Routine "correctFeed"-------
     t = 0
@@ -413,7 +415,7 @@ for thisTrial in trials:
             interTrialPol.tStart = t  # underestimates by a little under one frame
             interTrialPol.frameNStart = frameN  # exact frame index
             interTrialPol.setAutoDraw(True)
-        if interTrialPol.status == STARTED and t >= (0.0 + (intervalTime-win.monitorFramePeriod*0.75)): #most of one frame period left
+        if interTrialPol.status == STARTED and t >= (0.0 + (intervalTime)): #most of one frame period left
             interTrialPol.setAutoDraw(False)
         
         # check if all components have finished

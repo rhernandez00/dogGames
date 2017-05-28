@@ -18,21 +18,16 @@ import os  # handy system and path functions
 import serial
 import serial.tools.list_ports
 import time
+from sys import platform
 
-nTrials = 13
+
+raspberry = platform !='win32' #checks if it is running in windows
+
+nTrials = 15
 
 
-#vars for servo
-nPelletsMax = 13
-nTubes = 4
+testing = False
 
-testing = True
-raspberry = 0 #either working with raspberry (1) or not (0)
-tube = 1
-nPelletsGiven = 0
-tubesCord = [106,83,58,36]
-rotTube = tubesCord[0]
-outCord = 132
 ports = list(serial.tools.list_ports.comports())
 intervalTime = 2.000000
 
@@ -330,7 +325,7 @@ for thisTrial in trials:
         rewardState.fillColor = [0.8,0.,0.]
         correctFeedback = incorrectTime
         intervalTime = intervalIncorrect
-        water()
+        #water()
         
     # ------Prepare to start Routine "correctFeed"-------
     t = 0

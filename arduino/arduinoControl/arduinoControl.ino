@@ -4,7 +4,7 @@
 const int servoPin = 9; //declare pin for the servo
 const int outPos = 132; //out position
 const int waterPin = 8; //position for the water dispenser
-const int sensorPin = 7; //IR sensor
+const int sensorPin = 7; //IR sensor   
 const int servoDelay =3000; //delay to allow the servo to reach position;
 const int waterDelay = 10000; // delay to allow water to drop
 const unsigned long timeLimit = 4000; //time out for reward
@@ -45,7 +45,7 @@ void loop()
      { 
         timeStart = millis();
         myServo.write(outPos); //write the position into the servo
-        digitalWrite(13, HIGH);
+        digitalWrite(13, HIGH); //signal of servo on
         Serial.print("Servo on \n");
         timeElapsed = 0;
         continueCycle = true;
@@ -70,19 +70,10 @@ void loop()
         };
         delay(servoDelay); //pauses so the servo can reach its position
         myServo.write(inCord);
+        inCord = determineOutput();
         digitalWrite(13, LOW);
         Serial.print("Servo off \n");    
-        count = count + 1;
-        if (count >= nPelletsMax)
-        {
-          count = 0;
-          outCount = outCount + 1;
-          if (outCount > 3)
-          {
-            outCount = 0;  
-          };
-          inCord = inCords[outCount];
-        };
+        
      //}
     }
     else if (pos == 88)
@@ -95,3 +86,28 @@ void loop()
     };
   };
 };
+
+void giveReward()
+{
+  timeStart = millis();
+  myServo.write(outPos); //write the position into the servo
+  digitalWrite(13, HIGH); //signal of servo on
+  Serial.print("Servo on \n"); 
+}
+
+int determineOutput()
+{
+  count = count + 1;
+  if (count >= nPelletsMax)
+  {
+    count = 0;
+    outCount = outCount + 1;
+    if (outCount > 3)
+    {
+      outCount = 0;  
+    };
+    inCord = inCords[outCount];
+  };
+  return inCord
+};
+

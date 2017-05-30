@@ -7,7 +7,7 @@ const int waterPin = 8; //position for the water dispenser
 const int sensorPin = 7; //IR sensor   
 const int servoDelay =3000; //delay to allow the servo to reach position;
 const int waterDelay = 10000; // delay to allow water to drop
-const unsigned long timeLimit = 4000; //time out for reward
+const unsigned long timeLimit = 1000; //time out for reward
 
 unsigned long timeStart, timeFinish, timeElapsed;
 
@@ -17,7 +17,7 @@ int inCord = 106;
 int inCords[] = {106,83,58,36};
 int outCount = 0;
 int count = 0;
-int nPelletsMax = 5;
+int nPelletsMax = 6;
 boolean rewardGiven = false;
 boolean continueCycle = false;
  
@@ -38,64 +38,69 @@ void loop()
   if(Serial.available()!=0)
   { //wait until information is received from the serial port
     pos = Serial.parseInt(); //read the command from the serial port
-    if (pos == 99)
+    switch (pos)
     {
-      rewardGiven = false;
-     while (!(rewardGiven))
-     { 
-        timeStart = millis();
-        myServo.write(outPos); //write the position into the servo
-        digitalWrite(13, HIGH); //signal of servo on
-        Serial.print("Servo on \n");
-        timeElapsed = 0;
-        continueCycle = true;
-        while (continueCycle)
+      case 99:   
+        rewardGiven = false;
+        while (!(rewardGiven))
         {
-          if (!(digitalRead(sensorPin)))
+          timeStart = millis();
+          giveReward();  
+          while(true)
           {
-            Serial.print("Sensor on \n");
-            rewardGiven = true;
-            continueCycle = false;
-            Serial.print(timeElapsed);
-            Serial.print("\n");
-          };
-          
-          timeFinish = millis();
-          timeElapsed = timeFinish - timeStart;
-          if (timeElapsed > timeLimit)
-          {
-            Serial.print("Reward not detected \n");
-            continueCycle = false;
+            timeFinish = millis();
+            timeElapsed = timeFinish - timeStart;
+            if (!(digitalRead(sensorPin)))
+            {
+              Serial.print("Reward detected \n");
+              Serial.print(timeElapsed);
+              rewardGiven = true;
+              backToStart();
+              break;
+            }
+            else if (timeElapsed > timeLimit)
+            {
+              Serial.print("Time out \n");
+              backToStart();
+              break;
+            };
           };
         };
-        delay(servoDelay); //pauses so the servo can reach its position
-        myServo.write(inCord);
-        inCord = determineOutput();
+        break;
+      case 88:
+        digitalWrite(13, HIGH);
+        digitalWrite(waterPin,HIGH);
+        delay(waterDelay); //pauses for water to drop
         digitalWrite(13, LOW);
-        Serial.print("Servo off \n");    
-        
-     //}
-    }
-    else if (pos == 88)
-    {
-      digitalWrite(13, HIGH);
-      digitalWrite(waterPin,HIGH);
-      delay(waterDelay); //pauses for water to drop
-      digitalWrite(13, LOW);
-      digitalWrite(waterPin,LOW);
+        digitalWrite(waterPin,LOW);
+        break;
+      default:
+        Serial.print(pos);
+        break;
     };
+      
   };
 };
 
 void giveReward()
 {
-  timeStart = millis();
+  //timeStart = millis();
   myServo.write(outPos); //write the position into the servo
   digitalWrite(13, HIGH); //signal of servo on
   Serial.print("Servo on \n"); 
 }
 
-int determineOutput()
+void backToStart()
+{
+  inCord = determineInput();
+  myServo.write(inCord); //write the position into the servo
+  digitalWrite(13, LOW); //signal of servo on
+  Serial.print("Servo back to start \n"); 
+  delay(3000);
+  //Serial.print(inCord); 
+}
+
+int determineInput()
 {
   count = count + 1;
   if (count >= nPelletsMax)
@@ -108,6 +113,6 @@ int determineOutput()
     };
     inCord = inCords[outCount];
   };
-  return inCord
+  return inCord;
 };
 

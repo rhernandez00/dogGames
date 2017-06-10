@@ -35,15 +35,15 @@ intervalTime = 2.000000
 
 #--- box parameters---
 
-incorrectWidth = 0.4 
-incorrectHeight = 0.4 
+incorrectWidth = 0.1 
+incorrectHeight = 0.1 
 incorrectColor = [1,1,0]
 incorrectTime = 3.0
 intervalIncorrect = 0.5
 
 correctColor = [0,0,1]
-correctHeight = 0.4
-correctWidth = 0.4 #max 2
+correctHeight = 0.6
+correctWidth = 0.6 #max 2
 correctTime = 3.0
 intervalCorrect = 0.5
 

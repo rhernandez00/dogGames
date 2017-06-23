@@ -26,34 +26,36 @@ raspberry = platform !='win32' #checks if it is running in windows
 nTrials = 15
 
 
-testing = False
+testing = True
 
 ports = list(serial.tools.list_ports.comports())
-intervalTime = 2.000000
+#intervalTime = 2.000000
 
-
+prevCorrect = True #if previous trial was correct
 
 #--- box parameters---
+pol1S = 0.3
+pol1E = 3
+pol1C = [1,1,0]
 
-incorrectWidth = 0.35 
-incorrectHeight = 0.35 
-incorrectColor = [1,1,0]
+pol2S = 0.3
+pol2E = 4
+pol2C = [0,1,0]
+
 incorrectTime = 5.0
-intervalIncorrect = 0.5
+intervalIncorrect = 0.1
 
-correctColor = [0,0,1]
-correctHeight = 0.6
-correctWidth = 0.6 #max 2
-correctTime = 5.0
-intervalCorrect = 0.5
+correctTime = 4.0
+intervalCorrect = 0.1
+minTime = 2.0 #minimal time for the sample
 
 
 if testing:
-    highV = 2
-    lowV = 0
+    highV = 4
+    lowV = 2
 else:        
-    highV = 2
-    lowV = 0
+    highV = 4
+    lowV = 2
 
 for p in ports:
     if "CH340" in p[1]:
@@ -142,20 +144,20 @@ else:
 
 
 trialClock = core.Clock()
-incorrectPol = visual.Rect(win=win, name='incorrectPol',
-    width=[incorrectWidth, 2][0], height=[1, incorrectHeight][1],
+pol1 = visual.Polygon(win=win, edges=pol1E, radius=pol1S,name='pol1',
     ori=0, pos=[-0.5, 0],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
-    fillColor=incorrectColor, fillColorSpace='rgb',
+    fillColor=pol1C, fillColorSpace='rgb',
     opacity=1,depth=0.0, 
 interpolate=True)
-correctPol = visual.Rect(win=win, name='correctPol',
-    width=[correctWidth, 2][0], height=[1, correctHeight][1],
-    ori=0, pos=[0.5, 0],
+
+pol2 = visual.Polygon(win=win, edges=pol2E, radius=pol2S,name='pol2',
+    ori=0, pos=[-0.5, 0],
     lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
-    fillColor=correctColor, fillColorSpace='rgb',
-    opacity=1,depth=-1.0, 
+    fillColor=pol2C, fillColorSpace='rgb',
+    opacity=1,depth=0.0, 
 interpolate=True)
+
 mouse = event.Mouse(win=win)
 x, y = [None, None]
 
@@ -197,33 +199,150 @@ if thisTrial != None:
 
 for thisTrial in trials:
     #choses from two possible positions a place to set the correct and incorrect
-    side = randint(high=highV,low=lowV,size=1)
-    if side == 0:
-        correctPol.pos = [0.5,0]
-        incorrectPol.pos = [-0.5,0]
-    elif side == 1:
-        correctPol.pos = [-0.5,0]
-        incorrectPol.pos = [0.5,0]
-    else:
-        correctPol.pos = [-0.5,0]
-        incorrectPol.pos = [-1,0]
+    if prevCorrect:
+        side = randint(high=highV,low=lowV,size=1)
+        if side == 0:
+            selectedPol = pol1
+            incorrectPol = pol2
+            pol1.pos = [0.5,0]
+            pol2.pos = [-0.5,0]
+        elif side == 1:
+            selectedPol = pol2
+            incorrectPol = pol1
+            pol1.pos = [-0.5,0]
+            pol2.pos = [0.5,0]
+        elif side == 2:
+            selectedPol = pol2
+            incorrectPol = pol1
+            pol1.pos = [0.5,0]
+            pol2.pos = [-0.5,0]
+        elif side == 3:
+            selectedPol = pol1
+            incorrectPol = pol2
+            pol1.pos = [-0.5,0]
+            pol2.pos = [0.5,0]
+        else:
+            pol1.pos = [-0.5,0]
+            pol2.pos = [-1,0]
 
-    xCorrectMin = correctPol.pos[0] -correctWidth/2 
-    xCorrectMax = correctPol.pos[0] +correctWidth/2
-    yCorrectMin = correctPol.pos[1] -correctHeight/2 
-    yCorrectMax = correctPol.pos[1] +correctHeight/2
-    
-    xIncorrectMin = incorrectPol.pos[0] -incorrectWidth/2 
-    xIncorrectMax = incorrectPol.pos[0] +incorrectWidth/2
-    yIncorrectMin = incorrectPol.pos[1] -incorrectHeight/2 
-    yIncorrectMax = incorrectPol.pos[1] +incorrectHeight/2
+        xCorrectMin = selectedPol.pos[0] -pol1S/1.5 
+        xCorrectMax = selectedPol.pos[0] +pol1S/1.5
+        yCorrectMin = selectedPol.pos[1] -pol1S/1.5 
+        yCorrectMax = selectedPol.pos[1] +pol1S/1.5
+        
+        xIncorrectMin = incorrectPol.pos[0] -pol2S/1.5 
+        xIncorrectMax = incorrectPol.pos[0] +pol2S/1.5
+        yIncorrectMin = incorrectPol.pos[1] -pol2S/1.5 
+        yIncorrectMax = incorrectPol.pos[1] +pol2S/1.5
     
     currentLoop = trials
     # abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
     if thisTrial != None:
         for paramName in thisTrial.keys():
             exec(paramName + '= thisTrial.' + paramName)
+    # ------------Prepare to start sample ---------------------
+    t = 0
+    trialClock.reset()  # clock 
+    frameN = -1
+    # update component parameters for each repeat
+    # setup some python lists for storing info about the mouse
+    mouse.x = []
+    mouse.y = []
+    mouse.leftButton = []
+    mouse.midButton = []
+    mouse.rightButton = []
+    mouse.time = []
+    # keep track of which components have finished
+    sampleComponents = []
+    sampleComponents.append(selectedPol)
+    sampleComponents.append(mouse)
+    selectedPol.pos = [0,0]
+
+    for thisComponent in sampleComponents:
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    continueRoutine = True
+    while continueRoutine:
+        # get current time
+        t = trialClock.getTime()
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        
+        # *selectedPol* updates
+        if t >= 0.0 and selectedPol.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            selectedPol.tStart = t  # underestimates by a little under one frame
+            selectedPol.frameNStart = frameN  # exact frame index
+            selectedPol.setAutoDraw(True)
+        # *mouse* updates
+        if t >= 0.0 and mouse.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            mouse.tStart = t  # underestimates by a little under one frame
+            mouse.frameNStart = frameN  # exact frame index
+            mouse.status = STARTED
+            event.mouseButtons = [0, 0, 0]  # reset mouse buttons to be 'up'
+        if mouse.status == STARTED:  # only update if started and not stopped!
+            if t > minTime:
+                buttons = mouse.getPressed()
+                if sum(buttons) > 0:  # ie if any button is pressed
+                    x, y = mouse.getPos()
+                    mouse.x.append(x)
+                    mouse.y.append(y)
+                    mouse.leftButton.append(buttons[0])
+                    mouse.midButton.append(buttons[1])
+                    mouse.rightButton.append(buttons[2])
+                    mouse.time.append(trialClock.getTime())
+                    continueRoutine = False
+                
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in sampleComponents:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # check for quit (the Esc key)
+        if endExpNow or event.getKeys(keyList=["escape"]):
+            core.quit()
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
     
+    #-------Ending Routine "trial"-------
+    for thisComponent in sampleComponents:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # store data for trials (TrialHandler)
+    trials.addData('mouse.x', mouse.x[0])
+    trials.addData('mouse.y', mouse.y[0])
+    trials.addData('mouse.leftButton', mouse.leftButton[0])
+    trials.addData('mouse.midButton', mouse.midButton[0])
+    trials.addData('mouse.rightButton', mouse.rightButton[0])
+    trials.addData('mouse.time', mouse.time[0])
+    # the Routine "trial" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
+
+    if side == 0:
+        pol1.pos = [0.5,0]
+        pol2.pos = [-0.5,0]
+    elif side == 1:
+        pol1.pos = [-0.5,0]
+        pol2.pos = [0.5,0]
+    elif side == 2:
+        pol1.pos = [0.5,0]
+        pol2.pos = [-0.5,0]
+    elif side == 3:
+        pol1.pos = [-0.5,0]
+        pol2.pos = [0.5,0]
+    else:
+        pol1.pos = [-0.5,0]
+        pol2.pos = [-1,0]
+
     #------Prepare to start Routine "trial"-------
     t = 0
     trialClock.reset()  # clock 
@@ -238,8 +357,8 @@ for thisTrial in trials:
     mouse.time = []
     # keep track of which components have finished
     trialComponents = []
-    trialComponents.append(incorrectPol)
-    trialComponents.append(correctPol)
+    trialComponents.append(pol1)
+    trialComponents.append(pol2)
     trialComponents.append(mouse)
     for thisComponent in trialComponents:
         if hasattr(thisComponent, 'status'):
@@ -254,18 +373,18 @@ for thisTrial in trials:
         # update/draw components on each frame
         
         # *incorrectPol* updates
-        if t >= 0.0 and incorrectPol.status == NOT_STARTED:
+        if t >= 0.0 and pol2.status == NOT_STARTED:
             # keep track of start time/frame for later
-            incorrectPol.tStart = t  # underestimates by a little under one frame
-            incorrectPol.frameNStart = frameN  # exact frame index
-            incorrectPol.setAutoDraw(True)
+            pol2.tStart = t  # underestimates by a little under one frame
+            pol2.frameNStart = frameN  # exact frame index
+            pol2.setAutoDraw(True)
         
         # *correctPol* updates
-        if t >= 0.0 and correctPol.status == NOT_STARTED:
+        if t >= 0.0 and pol1.status == NOT_STARTED:
             # keep track of start time/frame for later
-            correctPol.tStart = t  # underestimates by a little under one frame
-            correctPol.frameNStart = frameN  # exact frame index
-            correctPol.setAutoDraw(True)
+            pol1.tStart = t  # underestimates by a little under one frame
+            pol1.frameNStart = frameN  # exact frame index
+            pol1.setAutoDraw(True)
         # *mouse* updates
         if t >= 0.0 and mouse.status == NOT_STARTED:
             # keep track of start time/frame for later
@@ -324,6 +443,7 @@ for thisTrial in trials:
         rewardState.fillColor = [0.,0.,1.]
         correctFeedback = correctTime
         reward()
+        prevCorrect = True
         rewardReset = 1
         intervalTime = intervalCorrect
         #time.sleep(2)
@@ -331,6 +451,7 @@ for thisTrial in trials:
     else:
         rewardState.fillColor = [0.8,0.,0.]
         correctFeedback = incorrectTime
+        prevCorrect = False
         notifyError()
         intervalTime = intervalIncorrect
         #water()

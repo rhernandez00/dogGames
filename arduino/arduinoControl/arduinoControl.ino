@@ -2,10 +2,12 @@
  
 
 const int servoPin = 9; //declare pin for the servo
+const int piezoPin = 6;
 const int outPos = 132; //out position
 const int waterPin = 8; //position for the water dispenser
 const int sensorPin = 7; //IR sensor   
 const int servoDelay =3000; //delay to allow the servo to reach position;
+const int delayToBack = 1000;
 const int waterDelay = 10000; // delay to allow water to drop
 const unsigned long timeLimit = 1000; //time out for reward
 
@@ -17,7 +19,7 @@ int inCord = 106;
 int inCords[] = {106,83,58,36};
 int outCount = 0;
 int count = 0;
-int nPelletsMax = 6;
+int nPelletsMax = 100;
 boolean rewardGiven = false;
 boolean continueCycle = false;
  
@@ -31,6 +33,8 @@ void setup() {
   pinMode(sensorPin, INPUT);
   delay(100);
   myServo.write(inCords[0]);
+  delay(100);
+  myServo.detach(servoPin);
 }
  
 void loop() 
@@ -42,9 +46,14 @@ void loop()
     {
       case 99:   
         rewardGiven = false;
+        tone(piezoPin, 5000, 150);
+        delay(200);
+        tone(piezoPin, 4000, 150);
+        
         while (!(rewardGiven))
         {
           timeStart = millis();
+          
           giveReward();  
           while(true)
           {
@@ -61,6 +70,7 @@ void loop()
             else if (timeElapsed > timeLimit)
             {
               Serial.print("Time out \n");
+              delay(delayToBack);
               backToStart();
               break;
             };
@@ -74,6 +84,13 @@ void loop()
         digitalWrite(13, LOW);
         digitalWrite(waterPin,LOW);
         break;
+      case 77:
+        tone(piezoPin, 1000, 300);
+        delay(200);
+        tone(piezoPin, 500, 300);
+        delay(400);
+        tone(piezoPin, 500, 600);
+        break;
       default:
         Serial.print(pos);
         break;
@@ -85,18 +102,23 @@ void loop()
 void giveReward()
 {
   //timeStart = millis();
+  myServo.attach(servoPin);
   myServo.write(outPos); //write the position into the servo
   digitalWrite(13, HIGH); //signal of servo on
-  Serial.print("Servo on \n"); 
+  Serial.print("Servo on \n");
+  myServo.detach(servoPin);
+   
 }
 
 void backToStart()
 {
+  myServo.attach(servoPin);
   inCord = determineInput();
   myServo.write(inCord); //write the position into the servo
   digitalWrite(13, LOW); //signal of servo on
   Serial.print("Servo back to start \n"); 
-  delay(3000);
+  delay(servoDelay);
+  myServo.detach(servoPin);
   //Serial.print(inCord); 
 }
 

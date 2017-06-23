@@ -7,9 +7,8 @@ const int outPos = 132; //out position
 const int waterPin = 8; //position for the water dispenser
 const int sensorPin = 7; //IR sensor   
 const int servoDelay =3000; //delay to allow the servo to reach position;
-const int delayToBack = 1000;
 const int waterDelay = 10000; // delay to allow water to drop
-const unsigned long timeLimit = 1000; //time out for reward
+unsigned long timeLimit = 1500; //time out for reward
 
 unsigned long timeStart, timeFinish, timeElapsed;
 
@@ -17,9 +16,10 @@ int pos=90; //declare initial position of the servo
 
 int inCord = 106;
 int inCords[] = {106,83,58,36};
+int timeLimits[] = {1500,2500,4000,6000};
 int outCount = 0;
 int count = 0;
-int nPelletsMax = 100;
+int nPelletsMax = 2;
 boolean rewardGiven = false;
 boolean continueCycle = false;
  
@@ -33,8 +33,8 @@ void setup() {
   pinMode(sensorPin, INPUT);
   delay(100);
   myServo.write(inCords[0]);
-  delay(100);
-  myServo.detach(servoPin);
+  //delay(100);
+  //myServo.detach();
 }
  
 void loop() 
@@ -49,33 +49,7 @@ void loop()
         tone(piezoPin, 5000, 150);
         delay(200);
         tone(piezoPin, 4000, 150);
-        
-        while (!(rewardGiven))
-        {
-          timeStart = millis();
-          
-          giveReward();  
-          while(true)
-          {
-            timeFinish = millis();
-            timeElapsed = timeFinish - timeStart;
-            if (!(digitalRead(sensorPin)))
-            {
-              Serial.print("Reward detected \n");
-              Serial.print(timeElapsed);
-              rewardGiven = true;
-              backToStart();
-              break;
-            }
-            else if (timeElapsed > timeLimit)
-            {
-              Serial.print("Time out \n");
-              delay(delayToBack);
-              backToStart();
-              break;
-            };
-          };
-        };
+        giveReward();
         break;
       case 88:
         digitalWrite(13, HIGH);
@@ -83,6 +57,19 @@ void loop()
         delay(waterDelay); //pauses for water to drop
         digitalWrite(13, LOW);
         digitalWrite(waterPin,LOW);
+        break;
+      case 106:
+        myServo.attach(servoPin); 
+        digitalWrite(13, HIGH);
+        myServo.write(106); //write the position into the servo
+        digitalWrite(13, LOW);
+        break;
+
+      case 132:
+        myServo.attach(servoPin); 
+        digitalWrite(13, HIGH);
+        myServo.write(132); //write the position into the servo
+        digitalWrite(13, LOW);
         break;
       case 77:
         tone(piezoPin, 1000, 300);
@@ -101,26 +88,55 @@ void loop()
 
 void giveReward()
 {
-  //timeStart = millis();
-  myServo.attach(servoPin);
-  myServo.write(outPos); //write the position into the servo
-  digitalWrite(13, HIGH); //signal of servo on
-  Serial.print("Servo on \n");
-  myServo.detach(servoPin);
-   
+  
+  rewardGiven = false; 
+  while(rewardGiven == false)
+  {
+    //myServo.attach(servoPin);
+    myServo.write(outPos); //write the position into the servo
+    Serial.print("Time limit is ");
+    Serial.print(timeLimit);
+     Serial.print(" \n ");
+    digitalWrite(13, HIGH); //signal of servo on
+    Serial.print("Servo on \n");
+    timeStart = millis();
+    while(true)
+    {
+      timeFinish = millis();
+      timeElapsed = timeFinish - timeStart;
+      if (!(digitalRead(sensorPin)))
+      {
+        Serial.print("Reward detected \n");
+        Serial.print(timeElapsed);
+        rewardGiven = true;
+        break;
+      }
+      else if (timeElapsed > timeLimit)
+      {
+        Serial.print("Time out \n");
+        break;
+      };
+    };
+    
+    backToStart();
+    //myServo.detach();
+  }
 }
 
 void backToStart()
 {
-  myServo.attach(servoPin);
+  
   inCord = determineInput();
+  
   myServo.write(inCord); //write the position into the servo
   digitalWrite(13, LOW); //signal of servo on
   Serial.print("Servo back to start \n"); 
   delay(servoDelay);
-  myServo.detach(servoPin);
-  //Serial.print(inCord); 
+  
+  
 }
+
+
 
 int determineInput()
 {
@@ -134,7 +150,10 @@ int determineInput()
       outCount = 0;  
     };
     inCord = inCords[outCount];
+    timeLimit = timeLimits[outCount];
   };
   return inCord;
 };
+
+
 

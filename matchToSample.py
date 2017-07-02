@@ -25,8 +25,8 @@ raspberry = platform !='win32' #checks if it is running in windows
 
 nTrials = 15
 
-
-testing = True
+anchoTarget = 1.0 #less is bigger
+testing = False
 
 ports = list(serial.tools.list_ports.comports())
 #intervalTime = 2.000000
@@ -39,23 +39,23 @@ pol1E = 3
 pol1C = [1,1,0]
 
 pol2S = 0.3
-pol2E = 4
-pol2C = [0,1,0]
+pol2E = 25
+pol2C = [0,1,1]
 
 incorrectTime = 5.0
 intervalIncorrect = 0.1
 
 correctTime = 4.0
 intervalCorrect = 0.1
-minTime = 2.0 #minimal time for the sample
+minTime = 1.0 #minimal time for the sample
 
 
 if testing:
     highV = 4
-    lowV = 2
+    lowV = 0
 else:        
-    highV = 4
-    lowV = 2
+    highV = 2
+    lowV = 0
 
 for p in ports:
     if "CH340" in p[1]:
@@ -63,14 +63,14 @@ for p in ports:
         strTmp = strTmp[0:5]
         strTmp = strTmp.replace('COM','')
         nPort = 'com' + strTmp
-
+print nPort
 #data = serial.Serial(nPort,9600,timeout=1)  
 if testing:
     print 'Fake arduino on'
 elif raspberry == 1:
     dataArduino = serial.Serial('/dev/ttyUSB0',9600,timeout=1)
 else:        
-    dataArduino = serial.Serial('com8',9600,timeout=1)
+    dataArduino = serial.Serial('com10',9600,timeout=1)
 
 
 def reward():
@@ -206,12 +206,12 @@ for thisTrial in trials:
             incorrectPol = pol2
             pol1.pos = [0.5,0]
             pol2.pos = [-0.5,0]
-        elif side == 1:
+        elif side == 2:
             selectedPol = pol2
             incorrectPol = pol1
             pol1.pos = [-0.5,0]
             pol2.pos = [0.5,0]
-        elif side == 2:
+        elif side == 1:
             selectedPol = pol2
             incorrectPol = pol1
             pol1.pos = [0.5,0]
@@ -225,15 +225,15 @@ for thisTrial in trials:
             pol1.pos = [-0.5,0]
             pol2.pos = [-1,0]
 
-        xCorrectMin = selectedPol.pos[0] -pol1S/1.5 
-        xCorrectMax = selectedPol.pos[0] +pol1S/1.5
-        yCorrectMin = selectedPol.pos[1] -pol1S/1.5 
-        yCorrectMax = selectedPol.pos[1] +pol1S/1.5
+        xCorrectMin = selectedPol.pos[0] -pol1S/anchoTarget 
+        xCorrectMax = selectedPol.pos[0] +pol1S/anchoTarget
+        yCorrectMin = selectedPol.pos[1] -pol1S/anchoTarget 
+        yCorrectMax = selectedPol.pos[1] +pol1S/anchoTarget
         
-        xIncorrectMin = incorrectPol.pos[0] -pol2S/1.5 
-        xIncorrectMax = incorrectPol.pos[0] +pol2S/1.5
-        yIncorrectMin = incorrectPol.pos[1] -pol2S/1.5 
-        yIncorrectMax = incorrectPol.pos[1] +pol2S/1.5
+        xIncorrectMin = incorrectPol.pos[0] -pol2S/anchoTarget 
+        xIncorrectMax = incorrectPol.pos[0] +pol2S/anchoTarget
+        yIncorrectMin = incorrectPol.pos[1] -pol2S/anchoTarget 
+        yIncorrectMax = incorrectPol.pos[1] +pol2S/anchoTarget
     
     currentLoop = trials
     # abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
@@ -330,10 +330,10 @@ for thisTrial in trials:
     if side == 0:
         pol1.pos = [0.5,0]
         pol2.pos = [-0.5,0]
-    elif side == 1:
+    elif side == 2:
         pol1.pos = [-0.5,0]
         pol2.pos = [0.5,0]
-    elif side == 2:
+    elif side == 1:
         pol1.pos = [0.5,0]
         pol2.pos = [-0.5,0]
     elif side == 3:

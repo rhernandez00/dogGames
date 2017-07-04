@@ -20,18 +20,19 @@ import serial.tools.list_ports
 import time
 from sys import platform
 
-
-raspberry = platform !='win32' #checks if it is running in windows
+testing = True
+saveData = True
+participante = 'Odin'
 
 nTrials = 15
 
+
+
 anchoTarget = 1.0 #less is bigger
-testing = False
 
-ports = list(serial.tools.list_ports.comports())
-#intervalTime = 2.000000
 
-prevCorrect = True #if previous trial was correct
+
+
 
 #--- box parameters---
 pol1S = 0.3
@@ -42,12 +43,13 @@ pol2S = 0.3
 pol2E = 25
 pol2C = [0,1,1]
 
-incorrectTime = 5.0
+incorrectTime = 4.0 #5
 intervalIncorrect = 0.1
 
-correctTime = 4.0
+correctTime = 3.0 #4
 intervalCorrect = 0.1
-minTime = 1.0 #minimal time for the sample
+
+minTime = 0.0 #minimal time for the sample 1
 
 
 if testing:
@@ -57,16 +59,20 @@ else:
     highV = 2
     lowV = 0
 
+
+ports = list(serial.tools.list_ports.comports())
 for p in ports:
     if "CH340" in p[1]:
         strTmp = str(p)
         strTmp = strTmp[0:5]
         strTmp = strTmp.replace('COM','')
         nPort = 'com' + strTmp
-print nPort
+
+raspberry = platform !='win32' #checks if it is running in windows
 #data = serial.Serial(nPort,9600,timeout=1)  
 if testing:
     print 'Fake arduino on'
+    participante = 'test'
 elif raspberry == 1:
     dataArduino = serial.Serial('/dev/ttyUSB0',9600,timeout=1)
 else:        
@@ -95,13 +101,15 @@ def notifyError():
         dataArduino.write(str(77))
     
 
+
+prevCorrect = True #if previous trial was correct
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(_thisDir)
 
 # Store info about the experiment session
 expName = 'exp2'  # from the Builder filename that created this script
-expInfo = {'session': '001', 'participant': 'test'}
+expInfo = {'session': '001', 'participant': participante}
 #dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 #if dlg.OK == False: core.quit()  # user pressed cancel
 expInfo['date'] = data.getDateStr()  # add a simple timestamp
@@ -114,14 +122,14 @@ filename = _thisDir + os.sep + 'data/%s_%s_%s' %(expInfo['participant'], expName
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
     originPath=None,
-    savePickle=False, saveWideText=False,
+    savePickle=saveData, saveWideText=saveData,
     dataFileName=filename)
 #save a log file for detail verbose info
 
 
 # LOG experiment
-#logFile = logging.LogFile(filename+'.log', level=logging.EXP)
-#logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
+logFile = logging.LogFile(filename+'.log', level=logging.EXP)
+logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
 
 endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
@@ -321,8 +329,6 @@ for thisTrial in trials:
     trials.addData('mouse.x', mouse.x[0])
     trials.addData('mouse.y', mouse.y[0])
     trials.addData('mouse.leftButton', mouse.leftButton[0])
-    trials.addData('mouse.midButton', mouse.midButton[0])
-    trials.addData('mouse.rightButton', mouse.rightButton[0])
     trials.addData('mouse.time', mouse.time[0])
     # the Routine "trial" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
@@ -433,9 +439,10 @@ for thisTrial in trials:
     trials.addData('mouse.x', mouse.x[0])
     trials.addData('mouse.y', mouse.y[0])
     trials.addData('mouse.leftButton', mouse.leftButton[0])
-    trials.addData('mouse.midButton', mouse.midButton[0])
-    trials.addData('mouse.rightButton', mouse.rightButton[0])
     trials.addData('mouse.time', mouse.time[0])
+    trials.addData('side', side[0])
+    
+    
     # the Routine "trial" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     
@@ -471,9 +478,7 @@ for thisTrial in trials:
     
     # -------Start Routine "correctFeed"-------
     while continueRoutine and routineTimer.getTime() > 0:
-        #if (routineTimer.getTime() < 1.00000) and (rewardReset == 1):
-            
-        #    rewardReset = 0
+        
         # get current time
         t = correctFeedClock.getTime()
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
@@ -509,8 +514,7 @@ for thisTrial in trials:
     for thisComponent in correctFeedComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)    
-    #reward set to 0
-    #dataArduino.write(str(rotTube))
+    
     
     #------Prepare to start Routine "intervalInter"-------
     t = 0
@@ -564,11 +568,12 @@ for thisTrial in trials:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     # LOG experiment
-    #thisExp.nextEntry()
+    thisExp.nextEntry()
     time.sleep(2)
     
     
 # completed X repeats of 'trials'
-dataArduino.close()
+if testing == False:
+    dataArduino.close()
 win.close()
 core.quit()

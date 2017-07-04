@@ -49,7 +49,7 @@ void loop()
         tone(piezoPin, 5000, 150);
         delay(200);
         tone(piezoPin, 4000, 150);
-        giveReward();
+        //giveReward();
         break;
       case 88:
         digitalWrite(13, HIGH);
